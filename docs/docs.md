@@ -3,11 +3,11 @@
 can handle 256 instructions
 
 4 registers
-r0 - null register
-r1
-r2
-r3
-r4
+r0 - null register - 0x0000
+r1 - 0x0001
+r2 - 0x0002
+r3 - 0x0003
+r4 - 0x0004
 
 instruction set:
 0x00 - null 
@@ -27,7 +27,19 @@ instruction set:
 
 
 flags:
-0x00 - null
-0x01 - 
+0x0000 - null
+0x0001 - 
 TODO: finish architecture:
     give codes to the assembly tokens
+
+
+operand type:
+0x00 = NULL
+0x01 = [0x0001] = Address
+0x02 = rX = register
+0x03 = 0x0001 = imm
+
+
+structure of instruction:
+ADD r1 5 [0x0001]
+

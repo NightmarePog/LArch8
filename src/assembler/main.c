@@ -1,9 +1,12 @@
 
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include "assembler.h"
 #include "string_tools.c"
 #define MAX_LINE_SIZE 128
 #define MAX_TOKENS 4
+
 
 // debug stuff
 
@@ -30,6 +33,32 @@ void print_tokens(char **program_tokens) {
     printf("===END OF THE LINE===\n");
 }
 
+int translate_line(char **tokenized_line) {
+    int translated_line = 0;
+    for (int i = 0; i < MAX_TOKENS; i++) {
+        switch (i) {
+            case OP_CODE: {
+                bool found = false;
+                for (int k = 0; instruction_set_dict[k].key != NULL; k++) {
+                    if (strcmp(instruction_set_dict[k].key, tokenized_line[i]) == 0) {
+                        found = true;
+                        translated_line += instruction_set_dict[k].value;
+                        break;
+                    }
+                }
+                if (!found) {
+                    printf("Unknown opcode: %s\n", tokenized_line[i]);
+                }
+                break;
+            }
+        }
+
+        translated_line = ((uint16_t)translated_line) << 8;
+
+        
+    }
+}
+
 int process_line(char **program_pointer) {
     if (!program_pointer) return 1;
     char *copy;
@@ -38,6 +67,7 @@ int process_line(char **program_pointer) {
         copy = strdup(program_pointer[i]);
         program_pointer[i] = rem_comms_in_line(copy); // removing comments
         if (tokenize_line(program_pointer[i], tokens) == 0) {
+            translate_line(tokens);
             print_tokens(tokens);
         } else {
             printf("tokenization failed\n");
@@ -56,7 +86,6 @@ int init(char *file_path) {
         char *program_text = get_string_from_file(file);
         char **program_lines = tokenize_lines(program_text);
         process_line(program_lines);
-        //print_tokens(program_lines);
     } else {
         printf("failed to open file\n");
         return 1;
