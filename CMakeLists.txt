@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME}
     src/assembler/main.c
     src/assembler/precompiler.c
     src/assembler/tokenization_and_parser.c
+    src/assembler/compiler.c
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE include)

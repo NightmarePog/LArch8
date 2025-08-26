@@ -1,0 +1,41 @@
+#ifndef ASSEMBLER_WORDS
+#define ASSEMBLER_WORDS
+#include "assembler.h"
+typedef enum {
+    OP_CODE,
+    ADDRESSING_MODE_0,
+    ADDRESSING_MODE_1, 
+    ADDRESSING_MODE_2, 
+} INSTRUCTION_STRUCT;
+
+DictEntry instruction_set_dict[] = {
+    { .key = "NULL",  .value = 0x00 },
+    { .key = "ADD",   .value = 0x01 },
+    { .key = "SUB",   .value = 0x02 },
+    { .key = "OR",    .value = 0x03 },
+    { .key = "NOT",   .value = 0x04 },
+    { .key = "AND",   .value = 0x05 },
+    { .key = "MUL",   .value = 0x06 },
+    { .key = "DIV",   .value = 0x07 },
+    { .key = "JE",    .value = 0x08 },
+    { .key = "JG",    .value = 0x09 },
+    { .key = "JL",    .value = 0x10 },
+    { .key = "JMP",   .value = 0x11 },
+
+    { .key = "VACANT", .value = 0x12 },
+    { .key = "VACANT", .value = 0x13 },
+    { .key = "VACANT", .value = 0x14 },
+
+    { .key = "HALT",  .value = 0x15 },
+    { .key = NULL, .value = -1 }
+};
+
+DictEntry register_set_dict[] = {
+    { .key = "R0", .value = 0x0000 }, // null register
+    { .key = "R1", .value = 0x0001 },
+    { .key = "R2", .value = 0x0002 },
+    { .key = "R3", .value = 0x0003 },
+    { .key = "R4", .value = 0x0004 },
+    { .key = NULL, .value = -1 }
+};
+#endif
