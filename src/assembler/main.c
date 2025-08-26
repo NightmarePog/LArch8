@@ -14,7 +14,7 @@
 void print_tokens(char **program_tokens) {
     if (!program_tokens) return;
 
-    for (int i = 0; i != (MAX_TOKENS-1); i++) {
+    for (int i = 0; i != (MAX_TOKENS); i++) {
         printf("%s\n", program_tokens[i]);
     }
     printf("===END OF THE LINE===\n");
