@@ -26,6 +26,7 @@ int is_valid_instruction(const char *token) {
     return 0;
 }
 
+
 // checks if register exists
 int is_register(const char *token) {
     for (int i = 0; reg_tokens[i] != NULL; i++) {
@@ -74,9 +75,21 @@ int is_number(const char *s) {
     return 1;
 }
 
+int is_address(const char *token) {
+    int token_size = strlen(token);
+    if (token[0] == '[' && token[token_size-1] == ']') {
+        char *token_copy = malloc(token_size-1);
+        strncpy(token_copy, token+1, token_size-2);
+        if (is_number(token_copy)) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 // decides if token is written as register token or number
-int is_register_or_number(const char *token) {
-    return is_register(token) || is_number(token);
+int is_adressing_mode(const char *token) {
+    return is_register(token) || is_number(token) || is_address(token);
 }
 
 // tries to tokenize line, returns number of tokens and put tokens into char *tokens[]
@@ -89,18 +102,25 @@ int tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
         if (!tokens[count]) {           // check malloc success
             // free previously allocated tokens before returning
             for (int j = 0; j < count; j++) free(tokens[j]);
+            printf("memory allocation error");
             return -2; // memory allocation error
         }
         count++;
         token = strtok(NULL, " ");
     }
 
-    if (token != NULL) return 1; // more tokens than MAX_TOKENS
-    if (count != MAX_TOKENS) return 1;
+    if (token != NULL) {
+        printf("token is null\n");
+        return 1;
+    } // more tokens than MAX_TOKENS
+    if (count != MAX_TOKENS) {
+        printf("not enough parameters\n");
+        return 1;
+    }
     if (!is_valid_instruction(tokens[0])) return 1;
 
     for (int i = 1; i < count; i++) {
-        if (!is_register_or_number(tokens[i])) return 1;
+        if (!is_adressing_mode(tokens[i])) return 1;
     }
 
     return 0;

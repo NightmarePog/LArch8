@@ -24,9 +24,15 @@ int open_file(char *file_path, FILE **file_pointer) {
 }
 
 bool is_anumber(const char *string, int start_offset, int end_offset) {
-    int size_string = sizeof(*string);
-    for (int i = 0+start_offset; i < size_string+end_offset; i++) {
-        if (!isdigit(string[i])) {
+    int len = strlen(string);
+    if (start_offset < 0 || end_offset > len) {
+        printf("offset bigger than string size\n");
+        return false;
+    }
+
+    for (int i = start_offset; i < end_offset; i++) {
+        if (!isdigit((unsigned char)string[i])) {
+            printf("%d is not a digit\n", string[i]);
             return false;
         }
     }
@@ -42,27 +48,45 @@ static int translate_imm(char *string) { return 0; }
 
 // returns 0 if failed
 // else returns number as address
-static int translate_address(const char *string) {
+int translate_address(const char *string) {
     int address_prefix = 3;
+
+    // validdates if it's even a number
     if (!is_anumber(string, 1, -1)) {
-        printf("syntax error, %s is not a number\n", string);
+        printf("syntax error, %s is not a number in brackets\n", string);
         return 0;
     }
 
-    // buffer - biggest number should be 255
-    char string_copy[3];
-    strncpy(string_copy, string, sizeof(string_copy) - 1);
-    string_copy[sizeof(string_copy) - 1] = '\0';
+    size_t len = strlen(string);
 
-    long val = strtol(string_copy, NULL, 0);
+    // cutting of [ and ]
+    char string_copy[5];
+    if (len - 2 >= sizeof(string_copy)) {
+        printf("number too long\n");
+        return 0;
+    }
 
-    // if is 8 bit num
+    strncpy(string_copy, string + 1, len - 2);
+    string_copy[len - 2] = '\0';
+
+    // translating from string to long
+    char *endptr;
+    long val = strtol(string_copy, &endptr, 0);
+
+    // checking if success
+    if (*endptr != '\0') {
+        printf("syntax error, %s is not a valid number\n", string);
+        return 0;
+    }
+
+    // controlling if value is between 0 and 255
     if (val < 0 || val > 255) {
         printf("value out of range (0-255): %s\n", string);
         return 0;
     }
 
-    return (int) (address_prefix << 3) | val;;
+    printf("%X+%lX\n", address_prefix << 8, val);
+    return (address_prefix << 8) | (int)val;
 }
 
 int translate_line(char **tokenized_line) {
@@ -91,6 +115,8 @@ int translate_line(char **tokenized_line) {
                     char last_token = tokenized_line[i][size_token-1];
                     if (first_token == '[' || last_token == ']') {
                         // Address
+                        printf("this is tokenized line: %s\n", tokenized_line[i]);
+                        printf("translated %d\n", translate_address(tokenized_line[i]));
                         translated_line += translate_address(tokenized_line[i]);
                     } else if (first_token == 'R') {
                         // Register          
@@ -102,6 +128,7 @@ int translate_line(char **tokenized_line) {
             
 
         }
+        // max size reached, no need to expand anymore
         if (i != MAX_TOKENS-1) {
             translated_line = ((uint32_t)translated_line) << 8;
         }
