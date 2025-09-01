@@ -19,15 +19,11 @@ DictEntry instruction_set_dict[] = {
     { .key = "DIV",   .value = 0x07 },
     { .key = "JE",    .value = 0x08 },
     { .key = "JG",    .value = 0x09 },
-    { .key = "JL",    .value = 0x10 },
-    { .key = "JMP",   .value = 0x11 },
-
-    { .key = "VACANT", .value = 0x12 },
-    { .key = "VACANT", .value = 0x13 },
-    { .key = "VACANT", .value = 0x14 },
-
-    { .key = "HALT",  .value = 0x15 },
-    { .key = NULL, .value = -1 }
+    { .key = "JL",    .value = 0x0A },
+    { .key = "JMP",   .value = 0x0B },
+    { .key = "HLT",  .value = 0x0F },
+    { .key = NULL, .value = -1 
+    }
 };
 
 DictEntry register_set_dict[] = {

@@ -9,7 +9,7 @@
 // all instructions tokens
 const char *instr_tokens[] = {
     "NULL", "ADD", "SUB", "OR", "NOT", "AND",
-    "MUL", "DIV", "JE", "JG", "JL", "JMP", NULL
+    "MUL", "DIV", "JE", "JG", "JL", "JMP", "HLT", NULL
 };
 
 // all register tokens
@@ -103,7 +103,7 @@ int tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
             // free previously allocated tokens before returning
             for (int j = 0; j < count; j++) free(tokens[j]);
             printf("memory allocation error");
-            return -2; // memory allocation error
+            return 1; // memory allocation error
         }
         count++;
         token = strtok(NULL, " ");
@@ -117,7 +117,10 @@ int tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
         printf("not enough parameters\n");
         return 1;
     }
-    if (!is_valid_instruction(tokens[0])) return 1;
+    if (!is_valid_instruction(tokens[0])) {
+        printf("Error, %s is not a valid instruction!", tokens[0]);
+        return 1;
+    }
 
     for (int i = 1; i < count; i++) {
         if (!is_adressing_mode(tokens[i])) return 1;

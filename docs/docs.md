@@ -20,11 +20,16 @@ instruction set:
 0x07 - div arg1 arg2 register
 0x08 - je compare compare jump_to 
 0x09 - jg compare compare jump_to 
-0x10 - jl compare compare jump_to 
-0x11 - jmp vacant vacant jump_to
-0x08-0x14 is vaccant
-0x15 - halt
+0x0A - jl compare compare jump_to 
+0x0B - jmp vacant vacant jump_to
+0x0C-0x0E is vaccant
+0x0F - hlt
 
+
+ADD - 10001
+R1 - 1000000001
+R1 - 1000000001
+[255] -
 
 flags:
 0x0000 - null
@@ -42,4 +47,7 @@ operand type:
 
 structure of instruction:
 ADD r1 5 [0x0001]
+
+
+
 

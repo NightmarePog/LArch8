@@ -39,8 +39,17 @@ bool is_anumber(const char *string, int start_offset, int end_offset) {
     return true;
 }
 
-static int translate_register(char *string) __attribute__((unused));
-static int translate_register(char *string) { return 0; }
+int translate_register(char *string) {
+    int address_prefix = 2;
+    if (string[0] != 'R') return 0;
+    switch (string[1]) {
+        case '1': return (1 << address_prefix) | 2;
+        case '2': return (2 << address_prefix) | 2;
+        case '3': return (3 << address_prefix) | 2;
+        case '4': return (4 << address_prefix) | 2;
+}
+
+}
 
 
 static int translate_imm(char *string) __attribute__((unused));
@@ -84,9 +93,8 @@ int translate_address(const char *string) {
         printf("value out of range (0-255): %s\n", string);
         return 0;
     }
-
-    printf("%X+%lX\n", address_prefix << 8, val);
-    return (address_prefix << 8) | (int)val;
+    printf("%X, %X, %X, %X <- output value addrdss \n", address_prefix, (int)val, address_prefix, ((int)val << address_prefix) | 3);
+    return ((int)val << address_prefix) | 2;
 }
 
 int translate_line(char **tokenized_line) {
@@ -115,8 +123,6 @@ int translate_line(char **tokenized_line) {
                     char last_token = tokenized_line[i][size_token-1];
                     if (first_token == '[' || last_token == ']') {
                         // Address
-                        printf("this is tokenized line: %s\n", tokenized_line[i]);
-                        printf("translated %d\n", translate_address(tokenized_line[i]));
                         translated_line += translate_address(tokenized_line[i]);
                     } else if (first_token == 'R') {
                         // Register          
@@ -128,8 +134,11 @@ int translate_line(char **tokenized_line) {
             
 
         }
+        printf("[%d] %X\n", i, translated_line);
         // max size reached, no need to expand anymore
-        if (i != MAX_TOKENS-1) {
+        if (i == 0) {
+            translated_line = ((uint32_t)translated_line) << 4;
+        } else if (i != MAX_TOKENS-1) {
             translated_line = ((uint32_t)translated_line) << 8;
         }
 
