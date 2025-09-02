@@ -93,12 +93,13 @@ int translate_address(const char *string) {
         printf("value out of range (0-255): %s\n", string);
         return 0;
     }
-    printf("%X, %X, %X, %X <- output value addrdss \n", address_prefix, (int)val, address_prefix, ((int)val << address_prefix) | 3);
     return ((int)val << address_prefix) | 2;
 }
 
 int translate_line(char **tokenized_line) {
-    int translated_line = 0;
+    uint64_t translated_line = 0;
+    // offset of 12 bits because of instruction start:
+    translated_line = translated_line << 12;
     for (int i = 0; i < MAX_TOKENS; i++) {
         switch (i) {
             case OP_CODE: {
@@ -118,7 +119,7 @@ int translate_line(char **tokenized_line) {
             case ADDRESSING_MODE_0:
             case ADDRESSING_MODE_1:
             case ADDRESSING_MODE_2: {
-                    int size_token = sizeof(*tokenized_line[i]);
+                    int size_token = strlen(tokenized_line[i]);
                     char first_token = tokenized_line[i][0];
                     char last_token = tokenized_line[i][size_token-1];
                     if (first_token == '[' || last_token == ']') {
@@ -126,6 +127,7 @@ int translate_line(char **tokenized_line) {
                         translated_line += translate_address(tokenized_line[i]);
                     } else if (first_token == 'R') {
                         // Register          
+                        printf("okay, uh, translate register :3 :3 : %X\n", translate_register(tokenized_line[i]));
                         translated_line += translate_register(tokenized_line[i]);    
                     } else if (strtol(tokenized_line[i], NULL, 0)) {
                         translated_line += translate_imm(tokenized_line[i]);
@@ -134,16 +136,16 @@ int translate_line(char **tokenized_line) {
             
 
         }
-        printf("[%d] %X\n", i, translated_line);
+        printf("[%d] - %lX\n", i, translated_line);
         // max size reached, no need to expand anymore
-        if (i == 0) {
-            translated_line = ((uint32_t)translated_line) << 4;
-        } else if (i != MAX_TOKENS-1) {
-            translated_line = ((uint32_t)translated_line) << 8;
+        if (i != MAX_TOKENS-1) {
+            printf("literally this is output of expanding: [%lX]\n", ((uint64_t)translated_line) << 16);
+            translated_line = ((uint64_t)translated_line) << 16; // after expansion sometimes seems like random numbers get generated - FIX error between index 1 and 2
         }
+        printf("after exp [%d] - %lX\n", i, translated_line);
 
         
     }
-    printf("translated to %X\n", translated_line);
+    printf("translated to %lX\n", translated_line);
     return 0;
 }
