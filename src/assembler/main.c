@@ -39,9 +39,9 @@ int assemble_program(char **program_pointer) {
   char *tokens[MAX_TOKENS];
   for (int i = 0; program_pointer[i] != NULL; i++) {
     copy = strdup(program_pointer[i]);
-    program_pointer[i] = rem_comms_in_line(copy); // removing comments
-    if (tokenize_line(program_pointer[i], tokens) == 0) {
-      translate_line(tokens);
+    program_pointer[i] = prec_remove_comments(copy); // removing comments
+    if (prec_tokenize_line(program_pointer[i], tokens) == 0) {
+      prec_translate_line(tokens);
       print_tokens(tokens);
     } else {
       printf("tokenization failed\n");
@@ -56,9 +56,9 @@ int assemble_program(char **program_pointer) {
 // proceeds the path argument, loads file and tries to assemble it
 int init(char *file_path) {
   FILE *file = NULL;
-  if (open_file(file_path, &file) == 0) {
-    char *program_text = get_string_from_file(file);
-    char **program_lines = tokenize_lines(program_text);
+  if (fp_open_file(file_path, &file) == 0) {
+    char *program_text = prec_get_string_from_file(file);
+    char **program_lines = prec_tokenize_lines(program_text);
     assemble_program(program_lines);
   } else {
     printf("failed to open file\n");

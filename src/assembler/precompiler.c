@@ -12,7 +12,7 @@
 #define MAX_LINES 256
 
 // cuts off the comment
-char *rem_comms_in_line(char *line) {
+char *prec_remove_comments(char *line) {
   char *comment_start = strchr(line, ';');
   if (comment_start != NULL) {
     *comment_start = '\0';
@@ -21,7 +21,7 @@ char *rem_comms_in_line(char *line) {
 }
 
 // gets whole line file input and tokenize it into lines
-char **tokenize_lines(char *input) {
+char **prec_tokenize_lines(char *input) {
   int capacity = 4; // start up line length
   char **lines = malloc(capacity * sizeof(char *));
   int count = 0;
@@ -62,7 +62,7 @@ char **tokenize_lines(char *input) {
 }
 
 // gets file and returns string
-char *get_string_from_file(FILE *file) {
+char *prec_get_string_from_file(FILE *file) {
   if (!file)
     return NULL;
 

@@ -102,7 +102,7 @@ bool is_adressing_mode(const char *token) {
 
 // tries to tokenize line, returns number of tokens and put tokens into char
 // *tokens[]
-int tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
+int prec_tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
   int count = 0;
   char *token = strtok(line, " ");
 
@@ -122,7 +122,8 @@ int tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
   if (token != NULL) {
     printf("token is null\n");
     return true;
-  } // more tokens than MAX_TOKENS
+  } 
+  // more tokens than MAX_TOKENS
   if (count != MAX_TOKENS) {
     printf("not enough parameters\n");
     return true;

@@ -16,7 +16,7 @@
 #include <string.h>
 
 // debug stuff
-void print_instruction(InstructionVal *instruction) {
+void at_print_instruction(InstructionVal *instruction) {
   printf("=========== INSTRUCTION ==============\n");
   printf("OP CODE: %hX\n", instruction->OP_CODE);
   printf("ADR MODE 1: %hX\n", instruction->ADDRESSING_MODE_0);
@@ -25,7 +25,7 @@ void print_instruction(InstructionVal *instruction) {
   printf("=========== INSTRUCTION END===========\n");
 }
 
-bool is_anumber(const char *string, int start_offset, int end_offset) {
+bool at_is_anumber(const char *string, int start_offset, int end_offset) {
   int len = strlen(string);
   if (start_offset < 0 || end_offset > len) {
     printf("offset bigger than string size\n");
@@ -41,7 +41,7 @@ bool is_anumber(const char *string, int start_offset, int end_offset) {
   return true;
 }
 
-int translate_register(char *string) {
+int at_translate_register(char *string) {
   int address_prefix = 2;
   if (string[0] != 'R')
     return 0;
@@ -57,15 +57,15 @@ int translate_register(char *string) {
   }
 }
 
-int translate_imm(char *string) { return string - string + 1; }
+int at_translate_imm(char *string) { return string - string + 1; }
 
 // returns 0 if failed
 // else returns number as address
-int translate_address(const char *string) {
+int at_translate_address(const char *string) {
   int address_prefix = 3;
 
   // validates if it's even a number
-  if (!is_anumber(string, 1, -1)) {
+  if (!at_is_anumber(string, 1, -1)) {
     fprintf(stderr, "syntax error, %s is not a number in brackets\n", string);
     return 0;
   }
