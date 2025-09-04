@@ -14,6 +14,7 @@
 #include "addr_translation.h"
 #include "assembler.h"
 #include "file_processer.h"
+#include "types.h"
 
 #define MAX_LINE_SIZE 128
 #define MAX_TOKENS 4
@@ -32,25 +33,38 @@ void print_tokens(char **program_tokens) {
 
 // divides program into lines, every line into token and after that it gets
 // translated into binary
-int assemble_program(char **program_pointer) {
+CompilationOutput assemble_program(char **program_pointer) {
+  CompilationOutput compilation_output = {0, 0};
   if (!program_pointer)
-    return 1;
+    return compilation_output;
   char *copy;
   char *tokens[MAX_TOKENS];
+  int program_size = 5;
+  uint64_t *compiled_program = malloc(program_size*sizeof(uint64_t));
+  int program_len = 0;
+
   for (int i = 0; program_pointer[i] != NULL; i++) {
+    program_len++;
+    if (program_size-i < 4) {
+      program_size += 10;
+      compiled_program = realloc(compiled_program, program_size*sizeof(uint64_t));
+    }
     copy = strdup(program_pointer[i]);
     program_pointer[i] = prec_remove_comments(copy); // removing comments
     if (prec_tokenize_line(program_pointer[i], tokens) == 0) {
-      prec_translate_line(tokens);
-      print_tokens(tokens);
+      printf("I DONT HAVE REALLY ANY IDEA WHAT AM I DOING: %lX\n", prec_translate_line(tokens));
+      compiled_program[i] = prec_translate_line(tokens);
+      printf("[ASSEMBLED LINE] - %lX\n", compiled_program[i]);
     } else {
       printf("tokenization failed\n");
-      return 1;
+      return compilation_output;
     }
   }
   free(copy);
 
-  return 0;
+  compilation_output.program = compiled_program;
+  compilation_output.size = program_len;
+  return compilation_output;
 }
 
 // proceeds the path argument, loads file and tries to assemble it
@@ -59,7 +73,10 @@ int init(char *file_path) {
   if (fp_open_file(file_path, &file) == 0) {
     char *program_text = prec_get_string_from_file(file);
     char **program_lines = prec_tokenize_lines(program_text);
-    assemble_program(program_lines);
+    CompilationOutput compilation_result = assemble_program(program_lines);
+    if (compilation_result.size != 0) {
+      fp_output_program("output.o", compilation_result.program, compilation_result.size);
+    }
   } else {
     printf("failed to open file\n");
     return 1;

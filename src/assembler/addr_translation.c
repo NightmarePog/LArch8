@@ -10,6 +10,7 @@
 
 #include "types.h"
 #include <ctype.h>
+#include <errno.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,8 +44,8 @@ bool at_is_anumber(const char *string, int start_offset, int end_offset) {
 
 int at_translate_register(char *string) {
   int address_prefix = 2;
-  if (string[0] != 'R')
-    return 0;
+  if (string[0] != 'R') return 0;
+
   switch (string[1]) {
   case '1':
     return (1 << address_prefix) | 2;
@@ -54,10 +55,35 @@ int at_translate_register(char *string) {
     return (3 << address_prefix) | 2;
   case '4':
     return (4 << address_prefix) | 2;
+  default:
+    fprintf(stderr, "error, unable to compile '%s'", string);
+    return 0;
   }
 }
 
-int at_translate_imm(char *string) { return string - string + 1; }
+int parse_number(const char *s) {
+    if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X')) {
+        // hex
+        return strtoull(s, NULL, 16);
+    } else if (s[0] == '0' && (s[1] == 'b' || s[1] == 'B')) {
+        // binární
+        int val = 0;
+        s += 2; // přeskočí "0b"
+        while (*s == '0' || *s == '1') {
+            val = (val << 1) | (*s - '0');
+            s++;
+        }
+        return val;
+    } else {
+        // desítkové
+        return strtoull(s, NULL, 10);
+    }
+}
+
+
+int at_translate_imm(char *string) {
+  return parse_number(string);
+}
 
 // returns 0 if failed
 // else returns number as address

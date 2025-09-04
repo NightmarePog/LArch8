@@ -31,11 +31,9 @@ uint64_t assemble_instruction(InstructionVal *instr) {
   return assembled_instruction;
 }
 
-int prec_translate_line(char **tokenized_line) {
-  // uint64_t translated_line = 0;
+uint64_t prec_translate_line(char **tokenized_line) {
   InstructionVal instruction;
   uint16_t token_buffer;
-  // offset of 12 bits because of instruction start:
   for (int i = 0; i < MAX_TOKENS; i++) {
     switch (i) {
     case OP_CODE: {
@@ -94,8 +92,8 @@ int prec_translate_line(char **tokenized_line) {
     default:
       printf("undefined behavior\n - 201 compiler.c");
     }
-    assemble_instruction(&instruction);
   }
   at_print_instruction(&instruction);
-  return 0;
+  printf("[NO IDEA WHAT IS THIS], %lX\n", assemble_instruction(&instruction));
+  return assemble_instruction(&instruction);
 }

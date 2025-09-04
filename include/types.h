@@ -23,6 +23,11 @@ typedef struct {
 
 } InstructionVal;
 
+typedef struct {
+    int size;
+    uint64_t* program;
+} CompilationOutput; 
+
 extern DictEntry instruction_set_dict[];
 extern DictEntry register_set_dict[];
 

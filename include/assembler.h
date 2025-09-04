@@ -1,5 +1,6 @@
 #ifndef ASSEMBLER
 #define ASSEMBLER
+#include <stdint.h>
 #include <stdio.h>
 
 // cuts of the comment
@@ -11,6 +12,6 @@ int prec_tokenize_line(char *line, char *tokens[]);
 // gets file and returns string
 char* prec_get_string_from_file(FILE *file);
 // tries to translate whole line into binary code
-int prec_translate_line(char **tokenized_line);
+uint64_t prec_translate_line(char **tokenized_line);
 
 #endif
