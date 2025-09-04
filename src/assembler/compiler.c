@@ -9,6 +9,17 @@
 #define MAX_LINE_SIZE 128
 #define MAX_TOKENS 4
 
+// debug stuff
+void print_instruction(INSTR_TRANS_STRUCT *instruction) {
+    printf("=========== INSTRUCTION ==============\n");
+    printf("OP CODE: %hX\n", instruction->OP_CODE);
+    printf("ADR MODE 1: %hX\n", instruction->ADDRESSING_MODE_0);
+    printf("ADR MODE 2: %hX\n", instruction->ADDRESSING_MODE_1);
+    printf("ADR MODE 3: %hX\n", instruction->ADDRESSING_MODE_2);
+    printf("=========== INSTRUCTION END===========\n");
+}
+
+
 void read_file(FILE *file) {
     char line[MAX_LINE_SIZE];
     while (fgets(line, sizeof(line), file)) {
@@ -60,7 +71,7 @@ static int translate_imm(char *string) { return 0; }
 int translate_address(const char *string) {
     int address_prefix = 3;
 
-    // validdates if it's even a number
+    // validates if it's even a number
     if (!is_anumber(string, 1, -1)) {
         printf("syntax error, %s is not a number in brackets\n", string);
         return 0;
@@ -93,13 +104,15 @@ int translate_address(const char *string) {
         printf("value out of range (0-255): %s\n", string);
         return 0;
     }
+    printf("[INTERNAL] - VAL: %ld, PREFIX: %d", val, address_prefix);
     return ((int)val << address_prefix) | 2;
 }
 
 int translate_line(char **tokenized_line) {
-    uint64_t translated_line = 0;
+    //uint64_t translated_line = 0;
+    INSTR_TRANS_STRUCT instruction;
+    uint16_t token_buffer;
     // offset of 12 bits because of instruction start:
-    translated_line = translated_line << 12;
     for (int i = 0; i < MAX_TOKENS; i++) {
         switch (i) {
             case OP_CODE: {
@@ -107,7 +120,7 @@ int translate_line(char **tokenized_line) {
                 for (int k = 0; instruction_set_dict[k].key != NULL; k++) {
                     if (strcmp(instruction_set_dict[k].key, tokenized_line[i]) == 0) {
                         found = true;
-                        translated_line += instruction_set_dict[k].value;
+                        token_buffer = instruction_set_dict[k].value;
                         break;
                     }
                 }
@@ -124,28 +137,51 @@ int translate_line(char **tokenized_line) {
                     char last_token = tokenized_line[i][size_token-1];
                     if (first_token == '[' || last_token == ']') {
                         // Address
-                        translated_line += translate_address(tokenized_line[i]);
+                        printf("[TRANSLATION] [ADDRESS] %s - %X\n", tokenized_line[i], translate_address(tokenized_line[i]));
+                        token_buffer = translate_address(tokenized_line[i]);
                     } else if (first_token == 'R') {
                         // Register          
-                        printf("okay, uh, translate register :3 :3 : %X\n", translate_register(tokenized_line[i]));
-                        translated_line += translate_register(tokenized_line[i]);    
+                        printf("[TRANSLATION] [REGISTER] %s - %X\n", tokenized_line[i], translate_register(tokenized_line[i]));
+                        token_buffer = translate_register(tokenized_line[i]);    
                     } else if (strtol(tokenized_line[i], NULL, 0)) {
-                        translated_line += translate_imm(tokenized_line[i]);
+                        // imm
+                        printf("[TRANSLATION] [IMM] %s - %X\n", tokenized_line[i], translate_imm(tokenized_line[i]));
+                        token_buffer = translate_imm(tokenized_line[i]);
                     }
                 }
             
 
         }
-        printf("[%d] - %lX\n", i, translated_line);
+        printf("[%d] - %hX\n", i, token_buffer);
         // max size reached, no need to expand anymore
-        if (i != MAX_TOKENS-1) {
-            printf("literally this is output of expanding: [%lX]\n", ((uint64_t)translated_line) << 16);
+       /* if (i != MAX_TOKENS-1) { 
+            printf("[ADDING] [BEFORE] - [%lX]\n", ((uint64_t)translated_line) << 16);
             translated_line = ((uint64_t)translated_line) << 16; // after expansion sometimes seems like random numbers get generated - FIX error between index 1 and 2
         }
-        printf("after exp [%d] - %lX\n", i, translated_line);
+        printf("[ADDING] [AFTER] [%d] - %lX\n", i, translated_line);
+        */
+        switch (i) {
+            case OP_CODE:
+                instruction.OP_CODE = token_buffer;
+                break;
+            case ADDRESSING_MODE_0:
+                instruction.ADDRESSING_MODE_0 = token_buffer;
+                break;
+            case ADDRESSING_MODE_1:
+                instruction.ADDRESSING_MODE_1 = token_buffer;
+                break;
+            case ADDRESSING_MODE_2:
+                instruction.ADDRESSING_MODE_2 = token_buffer;
+                break;
+            default:
+                printf("undefined behavior\n - 166 compiler.c");
 
         
+        }
+        
     }
-    printf("translated to %lX\n", translated_line);
+    print_instruction(&instruction);
     return 0;
 }
+
+
