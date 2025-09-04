@@ -7,7 +7,7 @@
 #define MAX_LINE_LEN 64
 #define MAX_LINES 256
 
-// cuts of the comment
+// cuts off the comment
 char* rem_comms_in_line(char* line) {
     char* comment_start = strchr(line, ';');
     if (comment_start != NULL) {
@@ -23,19 +23,18 @@ char** tokenize_lines(char* input) {
     int count = 0;
 
     while (*input != '\0') {
-        // find line lenght
+        // find line length
         int len = 0;
         char *start = input;
         while (input[len] != '\n' && input[len] != '\0') {
             len++;
         }
 
-        // allocate memory for that line according to it's length
         char *line = malloc(len + 1);
         strncpy(line, start, len);
         line[len] = '\0';
 
-        // if there are more lines and start up capacity it allocates
+        // if there are more lines than start up capacity, we allocate
         if (count >= capacity) {
             capacity *= 2;
             char **tmp = realloc(lines, capacity * sizeof(char*));
@@ -51,7 +50,7 @@ char** tokenize_lines(char* input) {
         lines[count++] = line;
 
         input += len;
-        if (*input == '\n') input++;  // skip new line lol
+        if (*input == '\n') input++;  // skip new line
     }
     return lines;
 }
@@ -63,11 +62,10 @@ char* get_string_from_file(FILE *file) {
     // get size of file
     fseek(file, 0, SEEK_END);
     long size = ftell(file);
-    if (size < 0) return NULL;  // error thingy :3
+    if (size < 0) return NULL;  // ftell failed
 
     fseek(file, 0, SEEK_SET);
 
-    // buffer allocation
     char *buffer = malloc(size + 1);
     if (!buffer) return NULL;
 
