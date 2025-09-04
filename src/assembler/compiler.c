@@ -9,7 +9,6 @@
 #define MAX_LINE_SIZE 128
 #define MAX_TOKENS 4
 
-// debug stuff
 void print_instruction(INSTR_TRANS_STRUCT *instruction) {
     printf("=========== INSTRUCTION ==============\n");
     printf("OP CODE: %hX\n", instruction->OP_CODE);
@@ -52,14 +51,17 @@ bool is_anumber(const char *string, int start_offset, int end_offset) {
 
 int translate_register(char *string) {
     int address_prefix = 2;
-    if (string[0] != 'R') return 0;
+
+    if (string[0] != 'R') {
+        return 0;
+    }
+
     switch (string[1]) {
         case '1': return (1 << address_prefix) | 2;
         case '2': return (2 << address_prefix) | 2;
         case '3': return (3 << address_prefix) | 2;
         case '4': return (4 << address_prefix) | 2;
-}
-
+    }
 }
 
 
@@ -71,7 +73,6 @@ static int translate_imm(char *string) { return 0; }
 int translate_address(const char *string) {
     int address_prefix = 3;
 
-    // validates if it's even a number
     if (!is_anumber(string, 1, -1)) {
         printf("syntax error, %s is not a number in brackets\n", string);
         return 0;
