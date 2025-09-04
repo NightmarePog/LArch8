@@ -1,3 +1,9 @@
+// tokenization_and_parser
+//
+// a simple parser and syntax checker 
+//
+// made by Lukáš Erl 4/9/2025
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>

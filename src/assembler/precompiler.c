@@ -1,3 +1,8 @@
+// precompiler.c
+//
+// gets input program ready for compilation process
+//
+// made by Lukáš Erl 4/9/2025
 
 #include <stddef.h>
 #include <stdio.h>

@@ -1,5 +1,5 @@
 
-// MAIN.C
+// main.c
 //
 // this is entry point of whole program
 // it gets arguments proceeds them and later gives output

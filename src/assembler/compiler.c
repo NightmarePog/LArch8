@@ -1,3 +1,10 @@
+// compiler.c
+//
+// core part of assembler
+//compiles code into binary values
+//
+// made by Lukáš Erl 4/9/2025
+
 #include "addr_translation.h"
 #include "assembler.h"
 #include "types.h"

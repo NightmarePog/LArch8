@@ -1,3 +1,9 @@
+/*
+assembler_words.c
+this is dictionary of words and their hex value so it's easy for assembler to translate them
+made by Lukáš Erl 4/9/2025
+*/
+
 #include "types.h"
 #include <string.h>
 
@@ -9,8 +15,3 @@ DictEntry instruction_set_dict[] = {
     {.key = "JE", .value = 0x08},   {.key = "JG", .value = 0x09},
     {.key = "JL", .value = 0x0A},   {.key = "JMP", .value = 0x0B},
     {.key = "HLT", .value = 0x0F},  {.key = NULL, .value = -1}};
-
-DictEntry register_set_dict[] = {
-    {.key = "R0", .value = 0x0000}, {.key = "R1", .value = 0x0001},
-    {.key = "R2", .value = 0x0002}, {.key = "R3", .value = 0x0003},
-    {.key = "R4", .value = 0x0004}, {.key = NULL, .value = -1}};

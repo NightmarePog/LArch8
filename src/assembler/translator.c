@@ -1,3 +1,11 @@
+// translator.c
+//
+// assembles the instructions into binary
+//
+// made by Lukáš Erl 4/9/2025
+
+
+
 #include "addr_translation.h"
 #include "assembler.h"
 #include "types.h"
