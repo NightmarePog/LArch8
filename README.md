@@ -10,5 +10,5 @@ the compiler is really simple and the pipeline is like this:
 code.asm -> tokenize lines into array -> remove comments from every line -> tokenize every line of the array and create matrix by that -> translating it into machine code (TODO) -> code.o
 ```
 
-i'll make the CPU in future
+i'll make the CPU in the future
 
