@@ -15,7 +15,7 @@ add_executable(${PROJECT_NAME}
     src/assembler/addr_translation.c
     src/assembler/file_processer.c
     src/assembler/precompiler.c
-    src/assembler/tokenization_and_parser.c
+    src/assembler/checks.c
     src/assembler/translator.c
     src/assembler/assembler_words.c
 )

@@ -21,28 +21,28 @@ const char *instr_tokens[] = {"NULL", "ADD", "SUB", "OR", "NOT", "AND", "MUL",
 const char *reg_tokens[] = {"R1", "R2", "R3", "R4", NULL};
 
 // checks if instruction exists
-int is_valid_instruction(const char *token) {
+bool is_valid_instruction(const char *token) {
   for (int i = 0; instr_tokens[i] != NULL; i++) {
     if (strcmp(token, instr_tokens[i]) == 0)
-      return 1;
+      return true;
   }
-  return 0;
+  return false;
 }
 
 // checks if register exists
-int is_register(const char *token) {
+bool is_register(const char *token) {
   for (int i = 0; reg_tokens[i] != NULL; i++) {
     if (strcmp(token, reg_tokens[i]) == 0)
-      return 1;
+      return true;
   }
-  return 0;
+  return false;
 }
 
 /*
  checks if is number
  supports hex, dec, bin
 */
-int is_number(const char *s) {
+bool is_number(const char *s) {
   if (*s == '-' || *s == '+')
     s++;
 
@@ -53,10 +53,10 @@ int is_number(const char *s) {
       return 0;
     while (*s) {
       if (!isxdigit(*s))
-        return 0;
+        return false;
       s++;
     }
-    return 1;
+    return true;
   }
 
   // binary numbers
@@ -83,20 +83,20 @@ int is_number(const char *s) {
   return 1;
 }
 
-int is_address(const char *token) {
+bool is_address(const char *token) {
   int token_size = strlen(token);
   if (token[0] == '[' && token[token_size - 1] == ']') {
     char *token_copy = malloc(token_size - 1);
     strncpy(token_copy, token + 1, token_size - 2);
     if (is_number(token_copy)) {
-      return 1;
+      return true;
     }
   }
-  return 0;
+  return false;
 }
 
 // decides if token is written as register token or number
-int is_adressing_mode(const char *token) {
+bool is_adressing_mode(const char *token) {
   return is_register(token) || is_number(token) || is_address(token);
 }
 
@@ -113,7 +113,7 @@ int tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
       for (int j = 0; j < count; j++)
         free(tokens[j]);
       printf("memory allocation error");
-      return 1; // memory allocation error
+      return true; // memory allocation error
     }
     count++;
     token = strtok(NULL, " ");
@@ -121,21 +121,21 @@ int tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
 
   if (token != NULL) {
     printf("token is null\n");
-    return 1;
+    return true;
   } // more tokens than MAX_TOKENS
   if (count != MAX_TOKENS) {
     printf("not enough parameters\n");
-    return 1;
+    return true;
   }
   if (!is_valid_instruction(tokens[0])) {
     printf("Error, %s is not a valid instruction!", tokens[0]);
-    return 1;
+    return true;
   }
 
   for (int i = 1; i < count; i++) {
     if (!is_adressing_mode(tokens[i]))
-      return 1;
+      return true;
   }
 
-  return 0;
+  return false;
 }
