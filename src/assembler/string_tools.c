@@ -1,3 +1,4 @@
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,3 +25,4 @@ long get_file_size(const char *path) {
 
     return size;
 }
+*/

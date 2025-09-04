@@ -5,19 +5,13 @@ TODO:
 8 - value + 3 type
 8 - value + 3 type
 
-
-ver 2:
-4 - OP CODE
-8 - value + 2 type
-8 - value + 2 type
-8 - value + 2 type
-=
-34
-still need 2 more bits -w-
-currect arc
+example INSTRUCTION: 000F000E07FA000E
+DEFINED AS: 
+- 000F - ADD
+- 000E - R3
+- 07FA - [255]
+- 000E - R3
 
 
-this is gonna be pain i might need to rework it -w-
-solutions? 
-- make it smaller
-- make instruction buffer to 64 bit (probably million times easier)
+# TODO:
+MAX_TOKENS and MAX_INSTRUCTION_LEN make as const and not preprocesor macro

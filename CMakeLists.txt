@@ -12,9 +12,12 @@ add_compile_options(-Wall -Wextra -pedantic)
 
 add_executable(${PROJECT_NAME}
     src/assembler/main.c
+    src/assembler/addr_translation.c
+    src/assembler/file_processer.c
     src/assembler/precompiler.c
     src/assembler/tokenization_and_parser.c
-    src/assembler/compiler.c
+    src/assembler/translator.c
+    src/assembler/assembler_words.c
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE include)
