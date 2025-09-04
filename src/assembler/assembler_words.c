@@ -1,4 +1,5 @@
-#include "assembler_words.h"
+#include "types.h"
+#include <string.h>
 
 DictEntry instruction_set_dict[] = {
     { .key = "NULL",  .value = 0x00 },

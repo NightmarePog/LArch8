@@ -1,39 +1,60 @@
 #include "assembler.h"
 #include "types.h"
 #include "addr_translation.h"
-
-
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-
 #define MAX_LINE_SIZE 128
 #define MAX_TOKENS 4
 
 
+// returns 0 if failed
+// else returns number as address
+int translate_address(const char *string) {
+    int address_prefix = 3;
 
-uint64_t assemble_instruction(InstructionVal *instr) {
-    uint64_t assembled_instruction = 0;
+    if (!is_anumber(string, 1, -1)) {
+        fprintf(stderr, "syntax error, %s is not a number in brackets\n", string);
+        return 0;
+    }
 
-    assembled_instruction |= ((uint64_t)instr->OP_CODE)           << 48;
-    assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_0) << 32;
-    assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_1) << 16;
-    assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_2) << 0;
+    size_t len = strlen(string);
 
-    printf("[ASSEMBLED LINE]: %016llX\n", (unsigned long long)assembled_instruction);
-    return assembled_instruction;
+    // cutting of [ and ]
+    char string_copy[5];
+    if (len - 2 >= sizeof(string_copy)) {
+        fprintf(stderr, "invalid number, expected 0-255, got %s\n", string_copy);
+        return 0;
+    }
+
+    strncpy(string_copy, string + 1, len - 2);
+    string_copy[len - 2] = '\0';
+
+    // translating from string to long
+    char *endptr;
+    long val = strtol(string_copy, &endptr, 0);
+
+    // checking if success
+    if (*endptr != '\0') {
+        fprintf(stderr, "syntax error, %s is not a valid number\n", string);
+        return 0;
+    }
+
+    // controlling if value is between 0 and 255
+    if (val < 0 || val > 255) {
+        fprintf(stderr, "value out of range (0-255): %s\n", string);
+        return 0;
+    }
+    return ((int)val << address_prefix) | 2;
 }
 
-
-
+// gets tokenized line and translates it to the binary 
 int translate_line(char **tokenized_line) {
-    //uint64_t translated_line = 0;
     InstructionVal instruction;
     uint16_t token_buffer;
-    // offset of 12 bits because of instruction start:
+
     for (int i = 0; i < MAX_TOKENS; i++) {
         switch (i) {
             case OP_CODE: {
@@ -46,7 +67,7 @@ int translate_line(char **tokenized_line) {
                     }
                 }
                 if (!found) {
-                    printf("Unknown opcode: %s\n", tokenized_line[i]);
+                    fprintf(stderr,"Unknown opcode: %s\n", tokenized_line[i]);
                 }
                 break;
             }
@@ -75,8 +96,8 @@ int translate_line(char **tokenized_line) {
         }
         printf("[%d] - %hX\n", i, token_buffer);
 
-        
-        
+
+
         switch (i) {
             case OP_CODE:
                 instruction.OP_CODE = token_buffer;
@@ -91,11 +112,10 @@ int translate_line(char **tokenized_line) {
                 instruction.ADDRESSING_MODE_2 = token_buffer;
                 break;
             default:
-                printf("undefined behavior\n - 201 compiler.c");
+                fprintf(stderr, "Error, while translating line, expected int 0 to 3, got %d", i);
 
         
         }
-        assemble_instruction(&instruction);
         
     }
     print_instruction(&instruction);

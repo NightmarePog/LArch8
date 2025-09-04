@@ -9,7 +9,7 @@
 #define ADDR_TRANSLATION
 
 
-#include "assembler_words.h"
+#include "types.h"
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -17,7 +17,7 @@
 #include <string.h>
 
 // debug stuff
-void print_instruction(INSTR_TRANS_STRUCT *instruction) {
+void print_instruction(InstructionVal *instruction) {
     printf("=========== INSTRUCTION ==============\n");
     printf("OP CODE: %hX\n", instruction->OP_CODE);
     printf("ADR MODE 1: %hX\n", instruction->ADDRESSING_MODE_0);
@@ -67,7 +67,7 @@ int translate_address(const char *string) {
 
     // validates if it's even a number
     if (!is_anumber(string, 1, -1)) {
-        printf("syntax error, %s is not a number in brackets\n", string);
+        fprintf(stderr, "syntax error, %s is not a number in brackets\n", string);
         return 0;
     }
 
@@ -76,7 +76,7 @@ int translate_address(const char *string) {
     // cutting of [ and ]
     char string_copy[5];
     if (len - 2 >= sizeof(string_copy)) {
-        printf("number too long\n");
+        fprintf(stderr, "number too long\n");
         return 0;
     }
 

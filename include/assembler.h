@@ -1,7 +1,6 @@
 #ifndef ASSEMBLER
 #define ASSEMBLER
 #include <stdio.h>
-#include "structs.h"
 
 // cuts of the comment
 char* rem_comms_in_line(char* line);
