@@ -23,14 +23,15 @@ int fp_open_file(char *file_path, FILE **file_pointer) {
 }
 
 void fp_output_program(const char *filename, const uint64_t *array, size_t length) {
-    FILE *fp = fopen(filename, "w");
+    FILE *fp = fopen(filename, "wb"); // "wb" = write binary
     if (!fp) {
         perror("Failed to open file");
         return;
     }
 
-    for (size_t i = 0; i < length; i++) {
-        fprintf(fp, "%lX\n", array[i]); // %llu = unsigned long long
+    size_t written = fwrite(array, sizeof(uint64_t), length, fp);
+    if (written != length) {
+        perror("fwrite failed");
     }
 
     fclose(fp);
