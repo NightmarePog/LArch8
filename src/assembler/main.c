@@ -40,19 +40,19 @@ CompilationOutput assemble_program(char **program_pointer) {
   char *copy;
   char *tokens[MAX_TOKENS];
   int program_size = 5;
-  uint64_t *compiled_program = malloc(program_size*sizeof(uint64_t));
+  uint64_t *compiled_program = malloc(program_size * sizeof(uint64_t));
   int program_len = 0;
 
   for (int i = 0; program_pointer[i] != NULL; i++) {
     program_len++;
-    if (program_size-i < 4) {
+    if (program_size - i < 4) {
       program_size += 10;
-      compiled_program = realloc(compiled_program, program_size*sizeof(uint64_t));
+      compiled_program =
+          realloc(compiled_program, program_size * sizeof(uint64_t));
     }
     copy = strdup(program_pointer[i]);
     program_pointer[i] = prec_remove_comments(copy); // removing comments
     if (prec_tokenize_line(program_pointer[i], tokens) == 0) {
-      printf("I DONT HAVE REALLY ANY IDEA WHAT AM I DOING: %lX\n", prec_translate_line(tokens));
       compiled_program[i] = prec_translate_line(tokens);
       printf("[ASSEMBLED LINE] - %lX\n", compiled_program[i]);
     } else {
@@ -75,7 +75,8 @@ int init(char *file_path) {
     char **program_lines = prec_tokenize_lines(program_text);
     CompilationOutput compilation_result = assemble_program(program_lines);
     if (compilation_result.size != 0) {
-      fp_output_program("output.o", compilation_result.program, compilation_result.size);
+      fp_output_program("output.o", compilation_result.program,
+                        compilation_result.size);
     }
   } else {
     printf("failed to open file\n");

@@ -1,7 +1,7 @@
 /*
 assembler_words.c
-this is dictionary of words and their hex value so it's easy for assembler to translate them
-made by Lukáš Erl 4/9/2025
+this is dictionary of words and their hex value so it's easy for assembler to
+translate them made by Lukáš Erl 4/9/2025
 */
 
 #include "types.h"

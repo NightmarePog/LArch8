@@ -1,7 +1,7 @@
 // compiler.c
 //
 // core part of assembler
-//compiles code into binary values
+// compiles code into binary values
 //
 // made by Lukáš Erl 4/9/2025
 
@@ -53,4 +53,3 @@ int translate_address(const char *string) {
   }
   return ((int)val << address_prefix) | 2;
 }
-

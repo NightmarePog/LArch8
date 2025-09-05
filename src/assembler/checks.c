@@ -1,6 +1,6 @@
 // tokenization_and_parser
 //
-// a simple parser and syntax checker 
+// a simple parser and syntax checker
 //
 // made by Lukáš Erl 4/9/2025
 
@@ -122,7 +122,7 @@ int prec_tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
   if (token != NULL) {
     printf("token is null\n");
     return true;
-  } 
+  }
   // more tokens than MAX_TOKENS
   if (count != MAX_TOKENS) {
     printf("not enough parameters\n");

@@ -4,8 +4,6 @@
 //
 // made by Lukáš Erl 4/9/2025
 
-
-
 #include "addr_translation.h"
 #include "types.h"
 
@@ -59,17 +57,17 @@ uint64_t prec_translate_line(char **tokenized_line) {
       if (first_token == '[' || last_token == ']') {
         // Address
         printf("[TRANSLATION] [ADDRESS] %s - %X\n", tokenized_line[i],
-              at_translate_address(tokenized_line[i]));
+               at_translate_address(tokenized_line[i]));
         token_buffer = at_translate_address(tokenized_line[i]);
       } else if (first_token == 'R') {
         // Register
         printf("[TRANSLATION] [REGISTER] %s - %X\n", tokenized_line[i],
-              at_translate_register(tokenized_line[i]));
+               at_translate_register(tokenized_line[i]));
         token_buffer = at_translate_register(tokenized_line[i]);
       } else if (strtol(tokenized_line[i], NULL, 0)) {
         // imm
         printf("[TRANSLATION] [IMM] %s - %X\n", tokenized_line[i],
-              at_translate_imm(tokenized_line[i]));
+               at_translate_imm(tokenized_line[i]));
         token_buffer = at_translate_imm(tokenized_line[i]);
       }
     }
