@@ -1,17 +1,17 @@
-TODO:
-- not enough space for 32 bits because i need 41 bits per one instruction:
-8 - OP CODE
-8 - value + 3 type
-8 - value + 3 type
-8 - value + 3 type
+# Assembler
+version: 0.1
 
-example INSTRUCTION: 000F000E07FA000E
-DEFINED AS: 
-- 000F - ADD
-- 000E - R3
-- 07FA - [255]
-- 000E - R3
+
+This program compiles custom assembly into binary code, binary code is defined in instruction_set
+## use: 
+```
+assembler <PATH/TO/YOUR/PROGRAM.ASM>
+```
+this outputs output.o which can be runable in custom assembly interpreter
 
 
 # TODO:
-MAX_TOKENS and MAX_INSTRUCTION_LEN make as const and not preprocesor macro
+- MAX_TOKENS and MAX_INSTRUCTION_LEN make as const and not preprocesor macro
+- functions: naming file, able to print in hex, printing output while compiling
+- R0 register
+- Function statement (GOTO)
