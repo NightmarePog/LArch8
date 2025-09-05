@@ -63,26 +63,6 @@ static void instr_jmp(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS jump_t
 }
 
 
-
-/*
-instruction set:
-0x00 - null 
-0x01 - add arg1 arg2 register
-0x02 - sub arg1 arg2 register
-0x03 - or arg1 arg2 register
-0x04 - not arg vaccant register
-0x05 - and arg1 arg2 register
-0x06 - mul arg1 arg2 register
-0x07 - div arg1 arg2 register
-0x08 - je compare compare jump_to 
-0x09 - jg compare compare jump_to 
-0x0A - jl compare compare jump_to 
-0x0B - jmp vacant vacant jump_to
-0x0C-0x14 is null
-0x0F - halt
-
-*/
-
 InstructionFn instruction_set[16] = {
     [0x00] = instr_null,
     [0x01] = instr_add,

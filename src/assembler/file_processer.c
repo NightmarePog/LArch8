@@ -22,19 +22,16 @@ int fp_open_file(char *file_path, FILE **file_pointer) {
   return !file;
 }
 
-#include <stdio.h>
-#include <stdint.h>
-
 void fp_output_program(const char *filename, const uint64_t *array, size_t length) {
-    FILE *fp = fopen(filename, "w"); // textový soubor
+    FILE *fp = fopen(filename, "wb");
     if (!fp) {
         perror("Failed to open file");
         return;
     }
 
-    for (size_t i = 0; i < length; i++) {
-        // vypíše 64bit číslo ve formátu HEX, 16 znaků, doplněno nulami
-        fprintf(fp, "0x%016llX\n", (unsigned long long)array[i]);
+    size_t written = fwrite(array, sizeof(uint64_t), length, fp);
+    if (written != length) {
+        perror("fwrite failed");
     }
 
     fclose(fp);
