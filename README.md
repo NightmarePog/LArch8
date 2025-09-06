@@ -1,5 +1,7 @@
-# my very own assembly and CPU Interpreter
-this is my first bigger C projects so please be kind to me
+# LArch8
+Lukas's Architecture 8 bit
+## my very own assembly and CPU Interpreter
+This is my first bigger C projects so please be kind to me
 
 
 ## Assembler
