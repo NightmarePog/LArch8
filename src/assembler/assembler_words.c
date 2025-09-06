@@ -7,7 +7,7 @@ translate them made by Lukáš Erl 4/9/2025
 #include "types.h"
 #include <string.h>
 
-DictEntry instruction_set_dict[] = {
+DictEntry const instruction_set_dict[] = {
     {.key = "NULL", .value = 0x00}, {.key = "ADD", .value = 0x01},
     {.key = "SUB", .value = 0x02},  {.key = "OR", .value = 0x03},
     {.key = "NOT", .value = 0x04},  {.key = "AND", .value = 0x05},

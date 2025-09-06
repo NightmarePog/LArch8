@@ -13,8 +13,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_LINE_SIZE 128
-#define MAX_TOKENS 4
 
 uint64_t assemble_instruction(InstructionVal *instr) {
   uint64_t assembled_instruction = 0;
@@ -88,7 +86,7 @@ uint64_t prec_translate_line(char **tokenized_line) {
       instruction.ADDRESSING_MODE_2 = token_buffer;
       break;
     default:
-      printf("undefined behavior\n - 201 compiler.c");
+      printf("undefined behavior\n - %d compiler.c", i);
     }
   }
   at_print_instruction(&instruction);

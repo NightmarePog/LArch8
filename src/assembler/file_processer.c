@@ -4,12 +4,12 @@
 //
 // made by Lukáš Erl
 
+#include "types.h"
 #include <stdint.h>
 #include <stdio.h>
-#define MAX_LINE_SIZE 4
 
 void fp_read_file(FILE *file) {
-  char line[MAX_LINE_SIZE];
+  char line[MAX_LINE_LEN];
   while (fgets(line, sizeof(line), file)) {
     printf("%s", line);
   }

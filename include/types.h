@@ -32,7 +32,5 @@ typedef struct {
     uint64_t* program;
 } CompilationOutput; 
 
-extern DictEntry instruction_set_dict[];
-extern DictEntry register_set_dict[];
-
+extern DictEntry const instruction_set_dict[];
 #endif
