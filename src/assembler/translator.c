@@ -92,6 +92,5 @@ uint64_t prec_translate_line(char **tokenized_line) {
     }
   }
   at_print_instruction(&instruction);
-  printf("[NO IDEA WHAT IS THIS], %lX\n", assemble_instruction(&instruction));
   return assemble_instruction(&instruction);
 }

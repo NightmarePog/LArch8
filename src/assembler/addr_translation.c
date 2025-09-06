@@ -66,16 +66,16 @@ int parse_number(const char *s) {
     // hex
     return strtoull(s, NULL, 16);
   } else if (s[0] == '0' && (s[1] == 'b' || s[1] == 'B')) {
-    // binární
+    // binary
     int val = 0;
-    s += 2; // přeskočí "0b"
+    s += 2;
     while (*s == '0' || *s == '1') {
       val = (val << 1) | (*s - '0');
       s++;
     }
     return val;
   } else {
-    // desítkové
+    // decimal
     return strtoull(s, NULL, 10);
   }
 }

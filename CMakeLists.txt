@@ -18,6 +18,7 @@ include_directories(
 # --- assembler ---
 add_executable(Assembler
     src/assembler/main.c
+    src/assembler/constants.c
     src/assembler/addr_translation.c
     src/assembler/file_processer.c
     src/assembler/precompiler.c
@@ -40,6 +41,7 @@ file(GLOB TEST_SRC "tests/tests/*.c")
 
 add_executable(run_tests
     ${TEST_SRC}
+    src/assembler/constants.c
     src/assembler/addr_translation.c
     src/assembler/file_processer.c
     src/assembler/precompiler.c

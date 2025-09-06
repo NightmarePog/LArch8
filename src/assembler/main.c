@@ -16,9 +16,6 @@
 #include "file_processer.h"
 #include "types.h"
 
-#define MAX_LINE_SIZE 128
-#define MAX_TOKENS 4
-
 // debug stuff
 
 void print_tokens(char **program_tokens) {

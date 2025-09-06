@@ -13,21 +13,10 @@
 #define MAX_TOKENS 4
 #define MAX_LINE_LEN 256
 
-// all instructions tokens
-const char *instr_tokens[] = {"NULL", "ADD", "SUB", "OR", "NOT", "AND", "MUL",
-                              "DIV",  "JE",  "JG",  "JL", "JMP", "HLT", NULL};
 
 // all register tokens
 const char *reg_tokens[] = {"R1", "R2", "R3", "R4", NULL};
 
-// checks if instruction exists
-bool is_valid_instruction(const char *token) {
-  for (int i = 0; instr_tokens[i] != NULL; i++) {
-    if (strcmp(token, instr_tokens[i]) == 0)
-      return true;
-  }
-  return false;
-}
 
 // checks if register exists
 bool is_register(const char *token) {
@@ -98,45 +87,4 @@ bool is_address(const char *token) {
 // decides if token is written as register token or number
 bool is_adressing_mode(const char *token) {
   return is_register(token) || is_number(token) || is_address(token);
-}
-
-// tries to tokenize line, returns number of tokens and put tokens into char
-// *tokens[]
-int prec_tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
-  int count = 0;
-  char *token = strtok(line, " ");
-
-  while (token != NULL && count < MAX_TOKENS) {
-    tokens[count] = strdup(token); // allocate new memory for token
-    if (!tokens[count]) {          // check malloc success
-      // free previously allocated tokens before returning
-      for (int j = 0; j < count; j++)
-        free(tokens[j]);
-      printf("memory allocation error");
-      return true; // memory allocation error
-    }
-    count++;
-    token = strtok(NULL, " ");
-  }
-
-  if (token != NULL) {
-    printf("token is null\n");
-    return true;
-  }
-  // more tokens than MAX_TOKENS
-  if (count != MAX_TOKENS) {
-    printf("not enough parameters\n");
-    return true;
-  }
-  if (!is_valid_instruction(tokens[0])) {
-    printf("Error, %s is not a valid instruction!", tokens[0]);
-    return true;
-  }
-
-  for (int i = 1; i < count; i++) {
-    if (!is_adressing_mode(tokens[i]))
-      return true;
-  }
-
-  return false;
 }
