@@ -12,10 +12,8 @@
 #define MAX_TOKENS 4
 #define MAX_LINE_LEN 256
 
-
 // all register tokens
 const char *reg_tokens[] = {"R1", "R2", "R3", "R4", NULL};
-
 
 // checks if register exists
 bool is_register(const char *token) {

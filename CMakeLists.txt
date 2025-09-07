@@ -20,11 +20,11 @@ add_executable(Assembler
     src/assembler/main.c
     src/assembler/constants.c
     src/assembler/addr_translation.c
-    src/assembler/file_processer.c
-    src/assembler/precompiler.c
+    src/file_processer.c
+    src/assembler/parsing.c
     src/assembler/checks.c
     src/assembler/translator.c
-    src/assembler/words.c
+    src/words.c
 )
 
 # --- interpreter ---
@@ -43,11 +43,11 @@ add_executable(run_tests
     ${TEST_SRC}
     src/assembler/constants.c
     src/assembler/addr_translation.c
-    src/assembler/file_processer.c
-    src/assembler/precompiler.c
+    src/file_processer.c
+    src/assembler/parsing.c
     src/assembler/checks.c
     src/assembler/translator.c
-    src/assembler/words.c
+    src/words.c
     thirdparty/Unity/src/unity.c
 )
 

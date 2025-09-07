@@ -11,12 +11,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "a_addr_translation.h"
-#include "a_assembler.h"
+#include "a_compilation.h"
+#include "a_parser.h"
 #include "a_file_processer.h"
 #include "a_types.h"
-
-// debug stuff
+#include "parser.h"
 
 void print_tokens(char **program_tokens) {
   if (!program_tokens)
@@ -48,9 +47,9 @@ CompilationOutput assemble_program(char **program_pointer) {
           realloc(compiled_program, program_size * sizeof(uint64_t));
     }
     copy = strdup(program_pointer[i]);
-    program_pointer[i] = prec_remove_comments(copy); // removing comments
-    if (prec_tokenize_line(program_pointer[i], tokens) == 0) {
-      compiled_program[i] = prec_translate_line(tokens);
+    program_pointer[i] = par_remove_comments(copy); // removing comments
+    if (par_tokenize_line(program_pointer[i], tokens) == 0) {
+      compiled_program[i] = par_translate_line(tokens);
       printf("[ASSEMBLED LINE] - %lX\n", compiled_program[i]);
     } else {
       printf("tokenization failed\n");
@@ -68,8 +67,8 @@ CompilationOutput assemble_program(char **program_pointer) {
 int init(char *file_path) {
   FILE *file = NULL;
   if (fp_open_file(file_path, &file) == 0) {
-    char *program_text = prec_get_string_from_file(file);
-    char **program_lines = prec_tokenize_lines(program_text);
+    char *program_text = par_get_string_from_file(file);
+    char **program_lines = par_str_to_lines(program_text);
     CompilationOutput compilation_result = assemble_program(program_lines);
     if (compilation_result.size != 0) {
       fp_output_program("output.o", compilation_result.program,

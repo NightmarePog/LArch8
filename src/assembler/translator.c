@@ -4,15 +4,15 @@
 //
 // made by Lukáš Erl 4/9/2025
 
-#include "a_addr_translation.h"
+#include "a_compilation.h"
 #include "a_types.h"
+#include "types.h"
 
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 
 uint64_t assemble_instruction(InstructionVal *instr) {
   uint64_t assembled_instruction = 0;
@@ -27,7 +27,7 @@ uint64_t assemble_instruction(InstructionVal *instr) {
   return assembled_instruction;
 }
 
-uint64_t prec_translate_line(char **tokenized_line) {
+uint64_t par_translate_line(char **tokenized_line) {
   InstructionVal instruction;
   uint16_t token_buffer;
   for (int i = 0; i < MAX_TOKENS; i++) {

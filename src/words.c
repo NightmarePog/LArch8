@@ -4,7 +4,7 @@ this is dictionary of words and their hex value so it's easy for assembler to
 translate them made by Lukáš Erl 4/9/2025
 */
 
-#include "a_types.h"
+#include "types.h"
 #include <string.h>
 
 DictEntry const instruction_set_dict[] = {

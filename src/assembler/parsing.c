@@ -4,15 +4,15 @@
 //
 // made by Lukáš Erl 4/9/2025
 
+#include "a_types.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "a_types.h"
 
 // cuts off the comment
-char *prec_remove_comments(char *line) {
+char *par_remove_comments(char *line) {
   char *comment_start = strchr(line, ';');
   if (comment_start != NULL) {
     *comment_start = '\0';
@@ -20,8 +20,7 @@ char *prec_remove_comments(char *line) {
   return line;
 }
 
-// gets whole line file input and tokenize it into lines
-char **prec_tokenize_lines(char *input) {
+char **par_str_to_lines(char *input) {
   int capacity = 4; // start up line length
   char **lines = malloc(capacity * sizeof(char *));
   int count = 0;
@@ -62,7 +61,7 @@ char **prec_tokenize_lines(char *input) {
 }
 
 // gets file and returns string
-char *prec_get_string_from_file(FILE *file) {
+char *par_get_string_from_file(FILE *file) {
   if (!file)
     return NULL;
 
@@ -87,7 +86,7 @@ char *prec_get_string_from_file(FILE *file) {
 
 // tries to tokenize line, returns number of tokens and put tokens into char
 // *tokens[]
-int prec_tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
+int par_tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
   int count = 0;
   char *token = strtok(line, " ");
 
@@ -105,4 +104,3 @@ int prec_tokenize_line(char *line, char *tokens[MAX_TOKENS]) {
   }
   return false;
 }
-
