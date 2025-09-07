@@ -11,10 +11,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "addr_translation.h"
-#include "assembler.h"
-#include "file_processer.h"
-#include "types.h"
+#include "a_addr_translation.h"
+#include "a_assembler.h"
+#include "a_file_processer.h"
+#include "a_types.h"
 
 // debug stuff
 

@@ -1,7 +1,7 @@
 #ifndef INSTRUCTIONS_H
 #define INSTRUCTIONS_H
 
-#include "cpu_struct.h"
+#include "a_cpu_struct.h"
 
 typedef void (*InstructionFn)(CPU *, REGISTERS, REGISTERS, REGISTERS);
 

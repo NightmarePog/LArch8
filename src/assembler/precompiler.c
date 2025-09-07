@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "types.h"
+#include "a_types.h"
 
 // cuts off the comment
 char *prec_remove_comments(char *line) {

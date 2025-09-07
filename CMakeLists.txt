@@ -24,7 +24,7 @@ add_executable(Assembler
     src/assembler/precompiler.c
     src/assembler/checks.c
     src/assembler/translator.c
-    src/assembler/assembler_words.c
+    src/assembler/words.c
 )
 
 # --- interpreter ---
@@ -47,7 +47,7 @@ add_executable(run_tests
     src/assembler/precompiler.c
     src/assembler/checks.c
     src/assembler/translator.c
-    src/assembler/assembler_words.c
+    src/assembler/words.c
     thirdparty/Unity/src/unity.c
 )
 

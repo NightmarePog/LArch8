@@ -1,2 +1,3 @@
 ADD R1 R2 R3
 ADD R4 R4 R4 
+DIV R0 [200] 0x16; comment

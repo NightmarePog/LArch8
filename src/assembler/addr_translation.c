@@ -8,7 +8,7 @@
 #ifndef ADDR_TRANSLATION
 #define ADDR_TRANSLATION
 
-#include "types.h"
+#include "a_types.h"
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
