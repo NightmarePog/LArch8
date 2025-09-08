@@ -23,6 +23,12 @@ int fp_open_file(char *file_path, FILE **file_pointer) {
   return !file;
 }
 
+int fp_open_file_bin(const char *file_path, FILE **file_pointer) {
+  FILE *file = fopen(file_path, "rb");
+  *file_pointer = file;
+  return !file;
+}
+
 void fp_output_program(const char *filename, const uint64_t *array,
                        size_t length) {
   FILE *fp = fopen(filename, "wb");

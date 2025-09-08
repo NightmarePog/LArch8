@@ -12,5 +12,6 @@ void fp_output_program(const char *filename, const uint64_t *array, size_t lengt
 
 void fp_output_program_hex(const char *filename, const uint64_t *array, size_t length);
 
+int fp_open_file_bin(const char *file_path, FILE **file_pointer);
 
 #endif

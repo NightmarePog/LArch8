@@ -9,30 +9,6 @@
 #include <string.h>
 
 
-// gets file and returns string
-char *par_get_string_from_file(FILE *file) {
-  if (!file)
-    return NULL;
-
-  // get size of file
-  fseek(file, 0, SEEK_END);
-  long size = ftell(file);
-  if (size < 0)
-    return NULL; // ftell failed
-
-  fseek(file, 0, SEEK_SET);
-
-  char *buffer = malloc(size + 1);
-  if (!buffer)
-    return NULL;
-
-  // this will load the file
-  size_t read_size = fread(buffer, 1, size, file);
-  buffer[read_size] = '\0'; // ends the string
-
-  return buffer;
-}
-
 char **par_str_to_lines(char *input) {
   int capacity = 4; // start up line length
   char **lines = malloc(capacity * sizeof(char *));

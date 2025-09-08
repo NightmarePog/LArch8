@@ -12,10 +12,10 @@
 #include <string.h>
 
 #include "a_compilation.h"
-#include "a_parser.h"
-#include "a_file_processer.h"
+#include "a_parsing.h"
 #include "a_types.h"
 #include "parser.h"
+#include "file_processer.h"
 
 void print_tokens(char **program_tokens) {
   if (!program_tokens)
@@ -72,7 +72,9 @@ int init(char *file_path) {
     CompilationOutput compilation_result = assemble_program(program_lines);
     if (compilation_result.size != 0) {
       fp_output_program("output.o", compilation_result.program,
+
                         compilation_result.size);
+      fp_output_program_hex("output.hex", compilation_result.program, compilation_result.size);
     }
   } else {
     printf("failed to open file\n");

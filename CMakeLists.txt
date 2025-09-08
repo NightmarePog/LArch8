@@ -39,7 +39,7 @@ add_executable(Interpreter
     src/parsing.c
     src/words.c
     src/file_processer.c
-
+    src/print.c
 )
 
 target_include_directories(Interpreter PRIVATE

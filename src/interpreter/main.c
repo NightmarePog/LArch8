@@ -1,14 +1,18 @@
+#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include "file_processer.h"
-#include "parser.h"
+#include "i_parser.h"
+#include "print.h"
 
 int init(char *file_path) {
   FILE *file = NULL;
-  if (fp_open_file(file_path, &file) == 0) {
-    char *program_text = par_get_string_from_file(file);
-    char **program_lines = par_str_to_lines(program_text);
+  size_t file_size;
+  if (fp_open_file_bin(file_path, &file) == 0) {
+    uint64_t *program_hex = par_get_binary_file(file, &file_size);
+    //char **program_lines = par_str_to_lines(program_text);
     // TODO PARSED
-    printf("program text: %s\n", program_text);
+    pr_print_text_hex(program_hex, file_size);
     // print_tokens(program_lines); -- i'll make function for that
     return 0;
   } else {
