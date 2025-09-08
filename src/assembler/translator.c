@@ -14,13 +14,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-uint64_t assemble_instruction(InstructionVal *instr) {
+uint64_t assemble_instruction(InstrBin *instr) {
   uint64_t assembled_instruction = 0;
 
   assembled_instruction |= ((uint64_t)instr->OP_CODE) << 48;
-  assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_0) << 32;
-  assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_1) << 16;
-  assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_2) << 0;
+  assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_0.uint16_t) << 32;
+  assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_1.uint16_t) << 16;
+  assembled_instruction |= ((uint64_t)instr->ADDRESSING_MODE_2.uint16_t) << 0;
 
   printf("[ASSEMBLED LINE]: %016llX\n",
          (unsigned long long)assembled_instruction);
@@ -28,9 +28,10 @@ uint64_t assemble_instruction(InstructionVal *instr) {
 }
 
 uint64_t par_translate_line(char **tokenized_line) {
-  InstructionVal instruction;
+  InstrBin instruction;
   uint16_t token_buffer;
   for (int i = 0; i < MAX_TOKENS; i++) {
+      printf("TOKEN BUFFER: %d\n", token_buffer);
     switch (i) {
     case OP_CODE: {
       bool found = false;
@@ -71,19 +72,18 @@ uint64_t par_translate_line(char **tokenized_line) {
     }
     }
     printf("[%d] - %hX\n", i, token_buffer);
-
     switch (i) {
     case OP_CODE:
       instruction.OP_CODE = token_buffer;
       break;
     case ADDRESSING_MODE_0:
-      instruction.ADDRESSING_MODE_0 = token_buffer;
+      instruction.ADDRESSING_MODE_0.uint16_t = token_buffer;
       break;
     case ADDRESSING_MODE_1:
-      instruction.ADDRESSING_MODE_1 = token_buffer;
+      instruction.ADDRESSING_MODE_1.uint16_t = token_buffer;
       break;
     case ADDRESSING_MODE_2:
-      instruction.ADDRESSING_MODE_2 = token_buffer;
+      instruction.ADDRESSING_MODE_2.uint16_t = token_buffer;
       break;
     default:
       printf("undefined behavior\n - %d compiler.c", i);

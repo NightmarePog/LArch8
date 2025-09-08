@@ -5,23 +5,22 @@
 //
 // made by Lukáš Erl
 // this is not right probably
-#ifndef ADDR_TRANSLATION
-#define ADDR_TRANSLATION
 
 #include "types.h"
 #include <ctype.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 // debug stuff
-void at_print_instruction(InstructionVal *instruction) {
+void at_print_instruction(InstrBin *instruction) {
   printf("=========== INSTRUCTION ==============\n");
   printf("OP CODE: %hX\n", instruction->OP_CODE);
-  printf("ADR MODE 1: %hX\n", instruction->ADDRESSING_MODE_0);
-  printf("ADR MODE 2: %hX\n", instruction->ADDRESSING_MODE_1);
-  printf("ADR MODE 3: %hX\n", instruction->ADDRESSING_MODE_2);
+  printf("ADR MODE 1: %hX\n", instruction->ADDRESSING_MODE_0.uint16_t);
+  printf("ADR MODE 2: %hX\n", instruction->ADDRESSING_MODE_1.uint16_t);
+  printf("ADR MODE 3: %hX\n", instruction->ADDRESSING_MODE_2.uint16_t);
   printf("=========== INSTRUCTION END===========\n");
 }
 
@@ -41,20 +40,20 @@ bool at_is_anumber(const char *string, int start_offset, int end_offset) {
   return true;
 }
 
-int at_translate_register(char *string) {
-  int address_prefix = 2;
+uint16_t at_translate_register(char *string) {
+  int address_prefix = REGIS;
   if (string[0] != 'R')
     return 0;
 
   switch (string[1]) {
   case '1':
-    return (1 << address_prefix) | 2;
+    return (address_prefix << 8) | 1;
   case '2':
-    return (2 << address_prefix) | 2;
+    return (address_prefix << 8) | 2;
   case '3':
-    return (3 << address_prefix) | 2;
+    return (address_prefix << 8) | 3;
   case '4':
-    return (4 << address_prefix) | 2;
+    return (address_prefix << 8) | 4;
   default:
     fprintf(stderr, "error, unable to compile '%s'", string);
     return 0;
@@ -80,12 +79,12 @@ int parse_number(const char *s) {
   }
 }
 
-int at_translate_imm(char *string) { return parse_number(string); }
+int at_translate_imm(char *string) { return (IMM << 8) | parse_number(string); }
 
 // returns 0 if failed
 // else returns number as address
-int at_translate_address(const char *string) {
-  int address_prefix = 3;
+uint16_t at_translate_address(const char *string) {
+  int address_prefix = ADDRESS;
 
   // validates if it's even a number
   if (!at_is_anumber(string, 1, -1)) {
@@ -121,7 +120,5 @@ int at_translate_address(const char *string) {
     return 0;
   }
   printf("[INTERNAL] - VAL: %ld, PREFIX: %d", val, address_prefix);
-  return ((int)val << address_prefix) | 2;
+  return ((uint16_t)address_prefix << 8) | val;
 }
-
-#endif

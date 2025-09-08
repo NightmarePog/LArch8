@@ -5,14 +5,15 @@
 #include "i_parser.h"
 #include "print.h"
 
+
+
 int init(char *file_path) {
   FILE *file = NULL;
-  size_t file_size;
   if (fp_open_file_bin(file_path, &file) == 0) {
-    uint64_t *program_hex = par_get_binary_file(file, &file_size);
+    par_parse(file);
     //char **program_lines = par_str_to_lines(program_text);
     // TODO PARSED
-    pr_print_text_hex(program_hex, file_size);
+    //pr_print_text_hex(program_hex, file_size);
     // print_tokens(program_lines); -- i'll make function for that
     return 0;
   } else {

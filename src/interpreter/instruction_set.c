@@ -1,6 +1,4 @@
-#ifndef CPU_INSTR_H
-#define CPU_INSTR_H
-
+#include <stdbool.h>
 #include <stdint.h>
 #include "a_cpu_struct.h"
 
@@ -62,6 +60,9 @@ static void instr_jmp(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS jump_t
     cpu->program_counter = jump_to;
 }
 
+static void instr_halt(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS jump_to) {
+    cpu->halt = true
+}
 
 InstructionFn instruction_set[16] = {
     [0x00] = instr_null,
@@ -74,11 +75,10 @@ InstructionFn instruction_set[16] = {
     [0x07] = instr_div,
     [0x08] = instr_je,
     [0x09] = instr_jg,
-    [0x0A] = instr_null,
-    [0x0B] = instr_null,
+    [0x0A] = instr_jl,
+    [0x0B] = instr_jmp,
     [0x0C] = instr_null,
     [0x0D] = instr_null,
     [0x0E] = instr_null,
     [0x0F] = instr_null,
 };
-#endif

@@ -27,6 +27,7 @@ add_executable(Assembler
     src/words.c
     src/file_processer.c
     src/parsing.c
+    src/const.c
     
 )
 
@@ -40,6 +41,7 @@ add_executable(Interpreter
     src/words.c
     src/file_processer.c
     src/print.c
+    src/const.c
 )
 
 target_include_directories(Interpreter PRIVATE

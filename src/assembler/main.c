@@ -16,6 +16,18 @@
 #include "a_types.h"
 #include "parser.h"
 #include "file_processer.h"
+#include "types.h"
+
+
+uint64_t make_header(void) {
+    uint64_t value = 0;
+    value |= (uint64_t)header.signature << 48;
+    value |= (uint64_t)header.version   << 32;
+    value |= (uint64_t)header.reserved_1 << 16;
+    value |= (uint64_t)header.reserved_2 << 0;
+
+    return value;
+}
 
 void print_tokens(char **program_tokens) {
   if (!program_tokens)
@@ -35,26 +47,34 @@ CompilationOutput assemble_program(char **program_pointer) {
     return compilation_output;
   char *copy;
   char *tokens[MAX_TOKENS];
-  int program_size = 5;
-  uint64_t *compiled_program = malloc(program_size * sizeof(uint64_t));
+  int allocated_size = 5;
   int program_len = 0;
+  uint64_t *compiled_program = malloc(allocated_size * sizeof(uint64_t));
+
+
+  compiled_program[HEADER_LINE] = make_header();
+  program_len++;
 
   for (int i = 0; program_pointer[i] != NULL; i++) {
     program_len++;
-    if (program_size - i < 4) {
-      program_size += 10;
+
+    if (allocated_size - i < 4) {
+      allocated_size += 10;
       compiled_program =
-          realloc(compiled_program, program_size * sizeof(uint64_t));
+          realloc(compiled_program, allocated_size * sizeof(uint64_t));
     }
+
     copy = strdup(program_pointer[i]);
-    program_pointer[i] = par_remove_comments(copy); // removing comments
+    program_pointer[i] = par_remove_comments(copy);
+
     if (par_tokenize_line(program_pointer[i], tokens) == 0) {
-      compiled_program[i] = par_translate_line(tokens);
-      printf("[ASSEMBLED LINE] - %lX\n", compiled_program[i]);
+      compiled_program[i+HEADER_OFFSET] = par_translate_line(tokens);
+      printf("[ASSEMBLED LINE] - %lX\n", compiled_program[i+HEADER_OFFSET]);
     } else {
-      printf("tokenization failed\n");
+      fprintf(stderr, "tokenization failed\n");
       return compilation_output;
     }
+
   }
   free(copy);
 

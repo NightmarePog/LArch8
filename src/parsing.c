@@ -4,7 +4,7 @@
 //
 // made by Lukáš Erl 4/9/2025
 
-#include <stdio.h>
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -15,7 +15,6 @@ char **par_str_to_lines(char *input) {
   int count = 0;
 
   while (*input != '\0') {
-    // find line length
     int len = 0;
     char *start = input;
     while (input[len] != '\n' && input[len] != '\0') {
