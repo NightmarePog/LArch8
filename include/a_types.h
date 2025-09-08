@@ -3,9 +3,6 @@
 
 #include <stdint.h>
 
-extern const int MAX_TOKENS;
-extern const int MAX_LINES;
-extern const int MAX_LINE_LEN;
 
 
 typedef enum {

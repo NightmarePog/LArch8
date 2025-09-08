@@ -10,5 +10,7 @@ int fp_open_file(char *file_path, FILE **file_pointer);
 
 void fp_output_program(const char *filename, const uint64_t *array, size_t length);
 
+void fp_output_program_hex(const char *filename, const uint64_t *array, size_t length);
+
 
 #endif

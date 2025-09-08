@@ -17,19 +17,29 @@ include_directories(
 
 # --- assembler ---
 add_executable(Assembler
+    # ASSEMBLER
     src/assembler/main.c
-    src/assembler/constants.c
     src/assembler/addr_translation.c
-    src/file_processer.c
     src/assembler/parsing.c
     src/assembler/checks.c
     src/assembler/translator.c
+    # GLOBALS
     src/words.c
+    src/file_processer.c
+    src/parsing.c
+    
 )
 
 # --- interpreter ---
 add_executable(Interpreter
+    #INTERPRETER
     src/interpreter/main.c
+    src/interpreter/parsing.c
+    #GLOBALS
+    src/parsing.c
+    src/words.c
+    src/file_processer.c
+
 )
 
 target_include_directories(Interpreter PRIVATE
@@ -41,14 +51,16 @@ file(GLOB TEST_SRC "tests/tests/*.c")
 
 add_executable(run_tests
     ${TEST_SRC}
-    src/assembler/constants.c
     src/assembler/addr_translation.c
-    src/file_processer.c
     src/assembler/parsing.c
     src/assembler/checks.c
     src/assembler/translator.c
+
     src/words.c
+    src/file_processer.c
+
     thirdparty/Unity/src/unity.c
+    
 )
 
 target_include_directories(run_tests PRIVATE

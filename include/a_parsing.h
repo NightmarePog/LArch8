@@ -1,5 +1,5 @@
-#ifndef ASSEMBLER
-#define ASSEMBLER
+#ifndef PARSING
+#define PARSING
 #include <stdint.h>
 
 // cuts of the comment

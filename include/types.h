@@ -2,10 +2,17 @@
 #define GLOBAL_TYPES
 
 #include <stdint.h>
+
+#define MAX_TOKENS    256
+#define MAX_LINES     1024
+#define MAX_LINE_LEN  512
+
 typedef struct {
     const char *key;
     int value;
 } DictEntry;
+
+
 
 typedef struct {
     uint16_t OP_CODE;

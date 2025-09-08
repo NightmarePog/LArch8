@@ -2,7 +2,7 @@
 #define CPU_INSTR_H
 
 #include <stdint.h>
-#include "cpu_struct.h"
+#include "a_cpu_struct.h"
 
 
 typedef void (*InstructionFn)(CPU *, REGISTERS, REGISTERS, REGISTERS);
