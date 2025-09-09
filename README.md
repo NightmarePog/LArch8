@@ -8,10 +8,12 @@ This is my first bigger C projects so please be kind to me
 
 the assembler is really simple and the pipeline is like this:
 ```
-code.asm -> tokenize lines into array -> remove comments from every line -> tokenize every line of the array and create matrix by that -> translating it into machine code (TODO) -> code.o
+code.asm -> tokenize lines into array -> remove comments from every line -> tokenize every line of the array and create matrix by that -> translating it into machine code -> code.o
 ```
 
 ## Interpreter
-I haven't started working on this yet
-
+even simpler
+```
+code.o -> parsing -> header check -> runtime
+```
 
