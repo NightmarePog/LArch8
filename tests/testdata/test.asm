@@ -1,4 +1,4 @@
 ADD R1 R2 R3
 ADD R4 R4 R4 
-DIV R0 [200] 0x16; comment
 DIV R2 R1 [20]
+PRN 0x20 R1 R1

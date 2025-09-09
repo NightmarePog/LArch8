@@ -1,5 +1,6 @@
 #include "types.h"
 #include "i_types.h"
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -59,7 +60,6 @@ InstrBin parse_instr(uint64_t raw) {
     // ADDRESSING_MODE_2
     i.ADDRESSING_MODE_2.adr_mode_t.prefix = (raw >> 8) & 0xFF;
     i.ADDRESSING_MODE_2.adr_mode_t.value  = (raw >> 0) & 0xFF;
-
     return i;
 }
 
@@ -107,8 +107,15 @@ Program par_parse(FILE *file) {
         program.instrArray[i-HEADER_OFFSET] = parse_instr(raw_program[i]);
         printf("program size: %zu\n", program.size);
     }
+
     program.size -= 1;
+    if (program.header.version != VERSION) {
+        fprintf(stderr, "Program version diffrence\n program version: %d\n interpreter version: %d\n", program.header.version, VERSION);
+        program.success = false;
+        return program;
+    }
     print_program(&program);
+    program.success = true;
     return program;
 
 }

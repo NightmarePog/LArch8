@@ -36,6 +36,8 @@ add_executable(Interpreter
     #INTERPRETER
     src/interpreter/main.c
     src/interpreter/parsing.c
+    src/interpreter/runtime.c
+    src/interpreter/instruction_set.c
     #GLOBALS
     src/parsing.c
     src/words.c

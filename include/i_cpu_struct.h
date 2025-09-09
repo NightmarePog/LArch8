@@ -1,10 +1,8 @@
-#ifndef CPU_STRUCT_H
-#define CPU_STRUCT_H
-
-#include <stdint.h>
+#pragma once
 #include <stdbool.h>
-
+#include <stdint.h>
 #define REGISTER_COUNT 4
+#define MEMORY_COUNT 512
 
 typedef enum {
     R0,
@@ -20,9 +18,9 @@ typedef enum {
 
 typedef struct {
     uint8_t registers[REGISTER_COUNT];
+    uint8_t RAM[MEMORY_COUNT];
     uint8_t program_counter;
     FLAGS flags;
     bool halt;
 } CPU;
 
-#endif // CPU_STRUCT_H

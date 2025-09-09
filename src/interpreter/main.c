@@ -4,17 +4,15 @@
 #include "file_processer.h"
 #include "i_parser.h"
 #include "print.h"
+#include "i_runtime.h"
 
 
 
 int init(char *file_path) {
   FILE *file = NULL;
   if (fp_open_file_bin(file_path, &file) == 0) {
-    par_parse(file);
-    //char **program_lines = par_str_to_lines(program_text);
-    // TODO PARSED
-    //pr_print_text_hex(program_hex, file_size);
-    // print_tokens(program_lines); -- i'll make function for that
+    Program program = par_parse(file);
+    runtime(program);
     return 0;
   } else {
     printf("failed to open file\n");

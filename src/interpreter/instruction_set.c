@@ -1,67 +1,82 @@
 #include <stdbool.h>
 #include <stdint.h>
-#include "a_cpu_struct.h"
+#include <stdio.h>
+#include "i_cpu_struct.h"
+#include "i_instruction_set.h"
 
 
-typedef void (*InstructionFn)(CPU *, REGISTERS, REGISTERS, REGISTERS);
 
+// NOP
+static void instr_null(CPU *cpu, uint8_t *a, uint8_t *b, uint8_t *c) {}
 
-
-static void instr_null(CPU *cpu, REGISTERS a, REGISTERS b, REGISTERS c) {}
-
-
-static void instr_add(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS reg) {
-    cpu->registers[reg] = cpu->registers[arg1] + cpu->registers[arg2];
+// ADD
+static void instr_add(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *reg) {
+    cpu->registers[*reg] = cpu->registers[*arg1] + cpu->registers[*arg2];
 }
 
-static void instr_sub(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS reg) {
-    cpu->registers[reg] = cpu->registers[arg1] - cpu->registers[arg2];
+// SUB
+static void instr_sub(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *reg) {
+    cpu->registers[*reg] = cpu->registers[*arg1] - cpu->registers[*arg2];
 }
 
-static void instr_or(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS reg) {
-    cpu->registers[reg] = cpu->registers[arg1] | cpu->registers[arg2];
+// OR
+static void instr_or(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *reg) {
+    cpu->registers[*reg] = cpu->registers[*arg1] | cpu->registers[*arg2];
 }
 
-static void instr_not(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS reg) {
-    cpu->registers[reg] = !cpu->registers[arg1];
+// NOT
+static void instr_not(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *reg) {
+    cpu->registers[*reg] = !cpu->registers[*arg1];
 }
 
-static void instr_and(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS reg) {
-    cpu->registers[reg] = cpu->registers[arg1] & cpu->registers[arg2];
+// AND
+static void instr_and(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *reg) {
+    cpu->registers[*reg] = cpu->registers[*arg1] & cpu->registers[*arg2];
 }
 
-static void instr_mul(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS reg) {
-    cpu->registers[reg] = cpu->registers[arg1] * cpu->registers[arg2];
+// MUL
+static void instr_mul(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *reg) {
+    cpu->registers[*reg] = cpu->registers[*arg1] * cpu->registers[*arg2];
 }
 
-static void instr_div(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS reg) {
-    cpu->registers[reg] = cpu->registers[arg1] / cpu->registers[arg2];
+// DIV
+static void instr_div(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *reg) {
+    cpu->registers[*reg] = cpu->registers[*arg1] / cpu->registers[*arg2];
 }
 
-static void instr_je(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS jump_to) {
-    if (cpu->registers[arg1] == cpu->registers[arg2]) {
-        cpu->program_counter = jump_to;
+// JE
+static void instr_je(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *jump_to) {
+    if (cpu->registers[*arg1] == cpu->registers[*arg2]) {
+        cpu->program_counter = *jump_to;
     }
 }
 
-static void instr_jg(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS jump_to) {
-    if (cpu->registers[arg1] > cpu->registers[arg2]) {
-        cpu->program_counter = jump_to;
+// JG
+static void instr_jg(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *jump_to) {
+    if (cpu->registers[*arg1] > cpu->registers[*arg2]) {
+        cpu->program_counter = *jump_to;
     }
 }
 
-static void instr_jl(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS jump_to) {
-    if (cpu->registers[arg1] < cpu->registers[arg2]) {
-        cpu->program_counter = jump_to;
+// JL
+static void instr_jl(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *jump_to) {
+    if (cpu->registers[*arg1] < cpu->registers[*arg2]) {
+        cpu->program_counter = *jump_to;
     }
 }
 
-static void instr_jmp(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS jump_to) {
-    cpu->program_counter = jump_to;
+// JMP
+static void instr_jmp(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *jump_to) {
+    cpu->program_counter = *jump_to;
 }
 
-static void instr_halt(CPU *cpu, REGISTERS arg1, REGISTERS arg2, REGISTERS jump_to) {
-    cpu->halt = true
+static void instr_prnt(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *jump_to) {
+    printf("%s\n", arg1);
+}
+
+// HALT
+static void instr_halt(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *jump_to) {
+    cpu->halt = true;
 }
 
 InstructionFn instruction_set[16] = {
@@ -77,8 +92,8 @@ InstructionFn instruction_set[16] = {
     [0x09] = instr_jg,
     [0x0A] = instr_jl,
     [0x0B] = instr_jmp,
-    [0x0C] = instr_null,
+    [0x0C] = instr_prnt,
     [0x0D] = instr_null,
     [0x0E] = instr_null,
-    [0x0F] = instr_null,
+    [0x0F] = instr_halt,
 };
