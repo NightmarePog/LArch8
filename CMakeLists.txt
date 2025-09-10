@@ -67,10 +67,10 @@ file(GLOB TEST_SRC "tests/tests/*.c")
 #    
 #)
 
-target_include_directories(run_tests PRIVATE
-    include
-    thirdparty/Unity/src
-)
+#target_include_directories(run_tests PRIVATE
+#    include
+#    thirdparty/Unity/src
+#)
 
 #enable_testing()
 #add_test(NAME assembler_test COMMAND run_tests)
