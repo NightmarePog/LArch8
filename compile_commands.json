@@ -1,0 +1,158 @@
+[
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/assembler/main.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/main.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/main.c",
+  "output": "CMakeFiles/Assembler.dir/src/assembler/main.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/assembler/addr_translation.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/addr_translation.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/addr_translation.c",
+  "output": "CMakeFiles/Assembler.dir/src/assembler/addr_translation.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/assembler/parsing.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/parsing.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/parsing.c",
+  "output": "CMakeFiles/Assembler.dir/src/assembler/parsing.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/assembler/checks.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/checks.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/checks.c",
+  "output": "CMakeFiles/Assembler.dir/src/assembler/checks.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/assembler/translator.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/translator.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/translator.c",
+  "output": "CMakeFiles/Assembler.dir/src/assembler/translator.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/words.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/words.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/words.c",
+  "output": "CMakeFiles/Assembler.dir/src/words.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/file_processer.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/file_processer.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/file_processer.c",
+  "output": "CMakeFiles/Assembler.dir/src/file_processer.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/parsing.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/parsing.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/parsing.c",
+  "output": "CMakeFiles/Assembler.dir/src/parsing.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Assembler.dir/src/const.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/const.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/const.c",
+  "output": "CMakeFiles/Assembler.dir/src/const.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/interpreter/main.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/interpreter/main.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/interpreter/main.c",
+  "output": "CMakeFiles/Interpreter.dir/src/interpreter/main.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/interpreter/parsing.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/interpreter/parsing.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/interpreter/parsing.c",
+  "output": "CMakeFiles/Interpreter.dir/src/interpreter/parsing.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/interpreter/runtime.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/interpreter/runtime.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/interpreter/runtime.c",
+  "output": "CMakeFiles/Interpreter.dir/src/interpreter/runtime.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/interpreter/instruction_set.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/interpreter/instruction_set.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/interpreter/instruction_set.c",
+  "output": "CMakeFiles/Interpreter.dir/src/interpreter/instruction_set.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/parsing.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/parsing.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/parsing.c",
+  "output": "CMakeFiles/Interpreter.dir/src/parsing.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/words.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/words.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/words.c",
+  "output": "CMakeFiles/Interpreter.dir/src/words.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/file_processer.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/file_processer.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/file_processer.c",
+  "output": "CMakeFiles/Interpreter.dir/src/file_processer.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/print.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/print.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/print.c",
+  "output": "CMakeFiles/Interpreter.dir/src/print.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/Interpreter.dir/src/const.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/const.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/const.c",
+  "output": "CMakeFiles/Interpreter.dir/src/const.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/run_tests.dir/tests/tests/test_assembler_compiles.c.o -c /home/nightmare/Documents/GitHub/CPU-project/tests/tests/test_assembler_compiles.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/tests/tests/test_assembler_compiles.c",
+  "output": "CMakeFiles/run_tests.dir/tests/tests/test_assembler_compiles.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/run_tests.dir/src/assembler/addr_translation.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/addr_translation.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/addr_translation.c",
+  "output": "CMakeFiles/run_tests.dir/src/assembler/addr_translation.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/run_tests.dir/src/assembler/parsing.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/parsing.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/parsing.c",
+  "output": "CMakeFiles/run_tests.dir/src/assembler/parsing.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/run_tests.dir/src/assembler/checks.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/checks.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/checks.c",
+  "output": "CMakeFiles/run_tests.dir/src/assembler/checks.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/run_tests.dir/src/assembler/translator.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/assembler/translator.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/assembler/translator.c",
+  "output": "CMakeFiles/run_tests.dir/src/assembler/translator.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/run_tests.dir/src/words.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/words.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/words.c",
+  "output": "CMakeFiles/run_tests.dir/src/words.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/run_tests.dir/src/file_processer.c.o -c /home/nightmare/Documents/GitHub/CPU-project/src/file_processer.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/src/file_processer.c",
+  "output": "CMakeFiles/run_tests.dir/src/file_processer.c.o"
+},
+{
+  "directory": "/home/nightmare/Documents/GitHub/CPU-project",
+  "command": "/usr/bin/cc  -I/home/nightmare/Documents/GitHub/CPU-project/include -I/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src  -g -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -pedantic -o CMakeFiles/run_tests.dir/thirdparty/Unity/src/unity.c.o -c /home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src/unity.c",
+  "file": "/home/nightmare/Documents/GitHub/CPU-project/thirdparty/Unity/src/unity.c",
+  "output": "CMakeFiles/run_tests.dir/thirdparty/Unity/src/unity.c.o"
+}
+]
