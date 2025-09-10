@@ -4,13 +4,11 @@
 //
 // made by Lukáš Erl 4/9/2025
 
-
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 
 #include "types.h"
 
@@ -46,8 +44,6 @@ char *par_get_string_from_file(FILE *file) {
 
   return buffer;
 }
-
-
 
 // tries to tokenize line, returns number of tokens and put tokens into char
 // *tokens[]

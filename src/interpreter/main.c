@@ -1,11 +1,9 @@
-#include <stddef.h>
-#include <stdint.h>
-#include <stdio.h>
 #include "file_processer.h"
 #include "i_parser.h"
 #include "i_runtime.h"
-
-
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
 
 int init(char *file_path) {
   FILE *file = NULL;

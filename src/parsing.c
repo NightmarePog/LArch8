@@ -4,10 +4,8 @@
 //
 // made by Lukáš Erl 4/9/2025
 
-
 #include <stdlib.h>
 #include <string.h>
-
 
 char **par_str_to_lines(char *input) {
   int capacity = 4; // start up line length
@@ -47,4 +45,3 @@ char **par_str_to_lines(char *input) {
   }
   return lines;
 }
-

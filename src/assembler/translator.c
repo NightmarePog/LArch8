@@ -31,7 +31,7 @@ uint64_t par_translate_line(char **tokenized_line) {
   InstrBin instruction;
   uint16_t token_buffer;
   for (int i = 0; i < MAX_TOKENS; i++) {
-      printf("TOKEN BUFFER: %d\n", token_buffer);
+    printf("TOKEN BUFFER: %d\n", token_buffer);
     switch (i) {
     case OP_CODE: {
       bool found = false;
