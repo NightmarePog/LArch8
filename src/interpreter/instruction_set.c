@@ -71,7 +71,7 @@ static void instr_jmp(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *jump_to) 
 }
 
 static void instr_prnt(CPU *cpu, uint8_t *arg1, uint8_t *arg2, uint8_t *jump_to) {
-    printf("%s\n", arg1);
+    printf("printing: %d\n", *arg1);
 }
 
 // HALT

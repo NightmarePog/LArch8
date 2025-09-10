@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 get_p_result get_p(AdressingMode_type addr_mode) {
@@ -25,7 +26,9 @@ get_p_result get_p(AdressingMode_type addr_mode) {
 
 void runtime(Program program) {
    CPU cpu;
+   cpu.halt = false;
    for (; cpu.program_counter < program.size; cpu.program_counter++) {
+      if (cpu.halt == true) break; 
       InstrBin exe_instr = program.instrArray[cpu.program_counter];
       uint8_t* memory_values[3];
       // getting needed memory addresses
@@ -44,13 +47,16 @@ void runtime(Program program) {
          }
          get_p_result result = get_p(adr_mode.adr_mode_t);
          if (result.is_imm == true) {
-            memory_values[i] = &adr_mode.adr_mode_t.value;
+            uint8_t* val = malloc(sizeof(int));
+            *val = adr_mode.adr_mode_t.value;
+            memory_values[i] = val;
          } else if (result.is_imm == false) {
+            printf("list aaa %d\n", i);
             memory_values[i] = result.p_address;
          }
       }
       
-      printf("running %X\n", exe_instr.OP_CODE);
+      printf("[RESULT OF WHATEVER]: %d\n", *memory_values[0]);
       instruction_set[exe_instr.OP_CODE](&cpu, memory_values[0], memory_values[1], memory_values[2]);
    }
 }
