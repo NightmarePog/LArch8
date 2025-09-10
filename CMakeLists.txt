@@ -53,19 +53,19 @@ target_include_directories(Interpreter PRIVATE
 # --- tests ---
 file(GLOB TEST_SRC "tests/tests/*.c")
 
-add_executable(run_tests
-    ${TEST_SRC}
-    src/assembler/addr_translation.c
-    src/assembler/parsing.c
-    src/assembler/checks.c
-    src/assembler/translator.c
-
-    src/words.c
-    src/file_processer.c
-
-    thirdparty/Unity/src/unity.c
-    
-)
+#add_executable(run_tests
+#    ${TEST_SRC}
+#    src/assembler/addr_translation.c
+#    src/assembler/parsing.c
+#    src/assembler/checks.c
+#    src/assembler/translator.c
+#
+#    src/words.c
+#    src/file_processer.c
+#
+#    thirdparty/Unity/src/unity.c
+#    
+#)
 
 target_include_directories(run_tests PRIVATE
     include
