@@ -3,7 +3,10 @@ name: CMake Build and Release
 on:
   push:
     tags:
-      - 'v*'  # spustí se jen při pushi tagu např. v1.0.0
+      - 'v*'
+
+permissions:
+  contents: write
 
 jobs:
   build-and-release:
@@ -23,8 +26,6 @@ jobs:
         run: |
           if [ -f run_tests ]; then
             ./run_tests
-          else
-            echo "No tests to run"
           fi
 
       - name: Create GitHub Release
