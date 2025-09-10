@@ -1,38 +1,44 @@
-name: CMake on a single platform
+name: CMake Build and Release
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-env:
-  BUILD_TYPE: Release
+    tags:
+      - 'v*'  # spustí se jen při pushi tagu např. v1.0.0
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
-    - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      - name: Build
+        run: cmake --build build --config Release
 
-    - name: Run Tests if available
-      working-directory: ${{github.workspace}}/build
-      run: |
-        if [ -f run_tests ]; then
-          ./run_tests
-        else
-          echo "No tests to run"
-        fi
+      - name: Run Tests if available
+        working-directory: build
+        run: |
+          if [ -f run_tests ]; then
+            ./run_tests
+          else
+            echo "No tests to run"
+          fi
 
-    - name: Upload binaries
-      uses: actions/upload-artifact@v4
-      with:
-        name: binaries
-        path: ${{github.workspace}}/build/*
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload binaries to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          files: build/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
