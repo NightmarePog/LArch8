@@ -29,7 +29,7 @@ jobs:
           fi
 
       - name: List build files
-        run: ls -R build
+        run: ls -l build
 
       - name: Create GitHub Release
         id: create_release
@@ -39,10 +39,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload binaries to Release
+      - name: Upload Interpreter and Assembler objects to Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref }}
-          files: build/**
+          files: |
+            build/Interpreter
+            build/Assembler
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
