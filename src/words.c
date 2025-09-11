@@ -14,5 +14,6 @@ DictEntry const instruction_set_dict[] = {
     {.key = "MUL", .value = 0x06},  {.key = "DIV", .value = 0x07},
     {.key = "JE", .value = 0x08},   {.key = "JG", .value = 0x09},
     {.key = "JL", .value = 0x0A},   {.key = "JMP", .value = 0x0B},
-    {.key = "PRN", .value = 0x0c},  {.key = "HLT", .value = 0x0F},
+    {.key = "PRN", .value = 0x0C},  {.key = "MOV", .value = 0x0D},
+    {.key = "HLT", .value = 0x0F},
     {.key = NULL, .value = -1}};
