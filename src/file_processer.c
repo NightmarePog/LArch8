@@ -45,14 +45,13 @@ void fp_output_program(const char *filename, const uint64_t *array,
 
 void fp_output_program_hex(const char *filename, const uint64_t *array,
                            size_t length) {
-  FILE *fp = fopen(filename, "w"); // textový režim
+  FILE *fp = fopen(filename, "w");
   if (!fp) {
     perror("Failed to open file");
     return;
   }
 
   for (size_t i = 0; i < length; i++) {
-    // zapíšeme každou hodnotu jako hex a nový řádek
     if (fprintf(fp, "0x%016llx\n", (unsigned long long)array[i]) < 0) {
       perror("fprintf failed");
       fclose(fp);
