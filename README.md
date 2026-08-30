@@ -1,19 +1,25 @@
 # LArch8
-Lukas's Architecture 8 bit
-## my very own assembly and CPU Interpreter
-This is my first bigger C projects so please be kind to me
 
+LArch8 is an early C learning project that explores a small 8-bit architecture,
+an assembler, and a CPU interpreter.
+
+> **Status:** Learning project. It represents an early experiment rather than a
+> production-ready toolchain.
 
 ## Assembler
 
-the assembler is really simple and the pipeline is like this:
+The assembler translates a source file into the bytecode consumed by the
+interpreter:
+
 ```
-code.asm -> tokenize lines into array -> remove comments from every line -> tokenize every line of the array and create matrix by that -> translating it into machine code -> code.o
+code.asm -> tokenize lines -> remove comments -> parse instructions -> code.o
 ```
 
 ## Interpreter
-even simpler
-```
-code.o -> parsing -> header check -> runtime
-```
 
+The interpreter validates the object-file header and executes the encoded
+instructions:
+
+```
+code.o -> parse -> validate header -> execute
+```
